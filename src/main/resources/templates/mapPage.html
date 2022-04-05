@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+  <head>
+    <title>Add Map</title>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <script src="../js/index.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#btn1").click(function(){
+          var url = "/api/findCoordinatesByAnimalName/";
+          var animalName = $('input[name="animalName"]').val();
+          url = url + animalName;
+          $.ajax({
+            type: "get",
+            dataType:"json",
+            url: url,
+            success: function(data){
+              initMap(data);
+            }
+          })
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h3>Google Map API</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+
+      <h1>First name:</h1>
+      <input type="text" name="animalName">
+      <button id="btn1">test button</button>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgJnK-1oUKm4c-2hbVMlxw5UHi0YsX3Ls&callback=initMap&v=weekly"
+      async
+    ></script>
+  </body>
+</html>

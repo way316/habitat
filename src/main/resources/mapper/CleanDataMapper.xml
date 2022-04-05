@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ie.ta21.habitat.mapper.CleanDataMapper">
+  <resultMap id="BaseResultMap" type="ie.ta21.habitat.entity.CleanData">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dataResourceUid" jdbcType="VARCHAR" property="dataresourceuid" />
+    <result column="license" jdbcType="VARCHAR" property="license" />
+    <result column="informationWithheld" jdbcType="VARCHAR" property="informationwithheld" />
+    <result column="individualCount" jdbcType="VARCHAR" property="individualcount" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="month" jdbcType="VARCHAR" property="month" />
+    <result column="day" jdbcType="VARCHAR" property="day" />
+    <result column="stateProvince" jdbcType="VARCHAR" property="stateprovince" />
+    <result column="decimalLatitude" jdbcType="VARCHAR" property="decimallatitude" />
+    <result column="decimalLongitude" jdbcType="VARCHAR" property="decimallongitude" />
+    <result column="geodeticDatum" jdbcType="VARCHAR" property="geodeticdatum" />
+    <result column="coordinateUncertaintyInMeters" jdbcType="VARCHAR" property="coordinateuncertaintyinmeters" />
+    <result column="verbatimLatitude" jdbcType="VARCHAR" property="verbatimlatitude" />
+    <result column="verbatimLongitude" jdbcType="VARCHAR" property="verbatimlongitude" />
+    <result column="taxonConceptID" jdbcType="VARCHAR" property="taxonconceptid" />
+    <result column="scientificName" jdbcType="VARCHAR" property="scientificname" />
+    <result column="order" jdbcType="VARCHAR" property="order" />
+    <result column="family" jdbcType="VARCHAR" property="family" />
+    <result column="genus" jdbcType="VARCHAR" property="genus" />
+    <result column="scientificNameAuthorship" jdbcType="VARCHAR" property="scientificnameauthorship" />
+    <result column="vernacularName" jdbcType="VARCHAR" property="vernacularname" />
+    <result column="verbatimBasisOfRecord" jdbcType="VARCHAR" property="verbatimbasisofrecord" />
+    <result column="species" jdbcType="VARCHAR" property="species" />
+    <result column="recordID" jdbcType="VARCHAR" property="recordid" />
+    <result column="verbatimScientificName" jdbcType="VARCHAR" property="verbatimscientificname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <select id="selectTop20" resultType="ie.ta21.habitat.entity.TopFiveVO">
+    SELECT vernacularName, count(*) AS count FROM Clean_data GROUP BY vernacularName ORDER BY count DESC LIMIT 20;
+  </select>
+  <select id="getCoordinatesByName" resultType="ie.ta21.habitat.entity.Coordinates">
+    SELECT decimalLatitude, decimalLongitude FROM Clean_data WHERE vernacularName LIKE "%"#{name}"%" LIMIT 100;
+  </select>
+  <select id="getAnimalByCoordinates" resultType="String">
+    select
+    vernacularName
+    from(select
+    ROUND(6378.138*2*ASIN(SQRT(POW(SIN((#{latitude}*PI()/180-decimalLatitude*PI()/180)/2),2)+
+    COS(#{latitude}*PI()/180)*COS(decimalLatitude*PI()/180)*POW(SIN((#{longitude}*PI()/180- decimalLongitude*PI()/180)/2),2)))*1000) AS distance,c.vernacularName
+    FROM
+    Clean_data as c
+    having
+    distance &lt;= 10000 AND distance &gt;= 5000) tableN
+    group by
+    vernacularName
+  </select>
+
+  <select id="getNearbyHabitat" resultType="ie.ta21.habitat.entity.Coordinates">
+    select
+        ROUND(6378.138*2*ASIN(SQRT(POW(SIN((#{latitude}*PI()/180-decimalLatitude*PI()/180)/2),2)+
+            COS(#{latitude}*PI()/180)*COS(decimalLatitude*PI()/180)*POW(SIN((#{longitude}*PI()/180- decimalLongitude*PI()/180)/2),2)))*1000) AS distance,c.vernacularName,c.decimalLongitude,c.decimalLatitude
+    FROM
+        Clean_data as c
+    WHERE vernacularName LIKE "%"#{animalName}"%"
+    having
+        distance &lt;= 20000 AND distance &gt;= 5000
+      limit 10
+  </select>
+
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, dataResourceUid, license, informationWithheld, individualCount, year, month, 
+    day, stateProvince, decimalLatitude, decimalLongitude, geodeticDatum, coordinateUncertaintyInMeters, 
+    verbatimLatitude, verbatimLongitude, taxonConceptID, scientificName, order, family, 
+    genus, scientificNameAuthorship, vernacularName, verbatimBasisOfRecord, species, 
+    recordID, verbatimScientificName
+  </sql>
+  <select id="selectByExample" parameterType="ie.ta21.habitat.entity.CleanDataExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Clean_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Clean_data
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Clean_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="ie.ta21.habitat.entity.CleanDataExample">
+    delete from Clean_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ie.ta21.habitat.entity.CleanData">
+    insert into Clean_data (id, dataResourceUid, license, 
+      informationWithheld, individualCount, year, 
+      month, day, stateProvince, 
+      decimalLatitude, decimalLongitude, geodeticDatum, 
+      coordinateUncertaintyInMeters, verbatimLatitude, 
+      verbatimLongitude, taxonConceptID, scientificName, 
+      order, family, genus, 
+      scientificNameAuthorship, vernacularName, 
+      verbatimBasisOfRecord, species, recordID, 
+      verbatimScientificName)
+    values (#{id,jdbcType=INTEGER}, #{dataresourceuid,jdbcType=VARCHAR}, #{license,jdbcType=VARCHAR}, 
+      #{informationwithheld,jdbcType=VARCHAR}, #{individualcount,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{month,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR}, #{stateprovince,jdbcType=VARCHAR}, 
+      #{decimallatitude,jdbcType=VARCHAR}, #{decimallongitude,jdbcType=VARCHAR}, #{geodeticdatum,jdbcType=VARCHAR}, 
+      #{coordinateuncertaintyinmeters,jdbcType=VARCHAR}, #{verbatimlatitude,jdbcType=VARCHAR}, 
+      #{verbatimlongitude,jdbcType=VARCHAR}, #{taxonconceptid,jdbcType=VARCHAR}, #{scientificname,jdbcType=VARCHAR}, 
+      #{order,jdbcType=VARCHAR}, #{family,jdbcType=VARCHAR}, #{genus,jdbcType=VARCHAR}, 
+      #{scientificnameauthorship,jdbcType=VARCHAR}, #{vernacularname,jdbcType=VARCHAR}, 
+      #{verbatimbasisofrecord,jdbcType=VARCHAR}, #{species,jdbcType=VARCHAR}, #{recordid,jdbcType=VARCHAR}, 
+      #{verbatimscientificname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ie.ta21.habitat.entity.CleanData">
+    insert into Clean_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dataresourceuid != null">
+        dataResourceUid,
+      </if>
+      <if test="license != null">
+        license,
+      </if>
+      <if test="informationwithheld != null">
+        informationWithheld,
+      </if>
+      <if test="individualcount != null">
+        individualCount,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="month != null">
+        month,
+      </if>
+      <if test="day != null">
+        day,
+      </if>
+      <if test="stateprovince != null">
+        stateProvince,
+      </if>
+      <if test="decimallatitude != null">
+        decimalLatitude,
+      </if>
+      <if test="decimallongitude != null">
+        decimalLongitude,
+      </if>
+      <if test="geodeticdatum != null">
+        geodeticDatum,
+      </if>
+      <if test="coordinateuncertaintyinmeters != null">
+        coordinateUncertaintyInMeters,
+      </if>
+      <if test="verbatimlatitude != null">
+        verbatimLatitude,
+      </if>
+      <if test="verbatimlongitude != null">
+        verbatimLongitude,
+      </if>
+      <if test="taxonconceptid != null">
+        taxonConceptID,
+      </if>
+      <if test="scientificname != null">
+        scientificName,
+      </if>
+      <if test="order != null">
+        order,
+      </if>
+      <if test="family != null">
+        family,
+      </if>
+      <if test="genus != null">
+        genus,
+      </if>
+      <if test="scientificnameauthorship != null">
+        scientificNameAuthorship,
+      </if>
+      <if test="vernacularname != null">
+        vernacularName,
+      </if>
+      <if test="verbatimbasisofrecord != null">
+        verbatimBasisOfRecord,
+      </if>
+      <if test="species != null">
+        species,
+      </if>
+      <if test="recordid != null">
+        recordID,
+      </if>
+      <if test="verbatimscientificname != null">
+        verbatimScientificName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dataresourceuid != null">
+        #{dataresourceuid,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null">
+        #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="informationwithheld != null">
+        #{informationwithheld,jdbcType=VARCHAR},
+      </if>
+      <if test="individualcount != null">
+        #{individualcount,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null">
+        #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="stateprovince != null">
+        #{stateprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="decimallatitude != null">
+        #{decimallatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="decimallongitude != null">
+        #{decimallongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="geodeticdatum != null">
+        #{geodeticdatum,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinateuncertaintyinmeters != null">
+        #{coordinateuncertaintyinmeters,jdbcType=VARCHAR},
+      </if>
+      <if test="verbatimlatitude != null">
+        #{verbatimlatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="verbatimlongitude != null">
+        #{verbatimlongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="taxonconceptid != null">
+        #{taxonconceptid,jdbcType=VARCHAR},
+      </if>
+      <if test="scientificname != null">
+        #{scientificname,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        #{order,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null">
+        #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="genus != null">
+        #{genus,jdbcType=VARCHAR},
+      </if>
+      <if test="scientificnameauthorship != null">
+        #{scientificnameauthorship,jdbcType=VARCHAR},
+      </if>
+      <if test="vernacularname != null">
+        #{vernacularname,jdbcType=VARCHAR},
+      </if>
+      <if test="verbatimbasisofrecord != null">
+        #{verbatimbasisofrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="species != null">
+        #{species,jdbcType=VARCHAR},
+      </if>
+      <if test="recordid != null">
+        #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="verbatimscientificname != null">
+        #{verbatimscientificname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ie.ta21.habitat.entity.CleanDataExample" resultType="java.lang.Integer">
+    select count(*) from Clean_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update Clean_data
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dataresourceuid != null">
+        dataResourceUid = #{record.dataresourceuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.license != null">
+        license = #{record.license,jdbcType=VARCHAR},
+      </if>
+      <if test="record.informationwithheld != null">
+        informationWithheld = #{record.informationwithheld,jdbcType=VARCHAR},
+      </if>
+      <if test="record.individualcount != null">
+        individualCount = #{record.individualcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null">
+        month = #{record.month,jdbcType=VARCHAR},
+      </if>
+      <if test="record.day != null">
+        day = #{record.day,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateprovince != null">
+        stateProvince = #{record.stateprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.decimallatitude != null">
+        decimalLatitude = #{record.decimallatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.decimallongitude != null">
+        decimalLongitude = #{record.decimallongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.geodeticdatum != null">
+        geodeticDatum = #{record.geodeticdatum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coordinateuncertaintyinmeters != null">
+        coordinateUncertaintyInMeters = #{record.coordinateuncertaintyinmeters,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verbatimlatitude != null">
+        verbatimLatitude = #{record.verbatimlatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verbatimlongitude != null">
+        verbatimLongitude = #{record.verbatimlongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxonconceptid != null">
+        taxonConceptID = #{record.taxonconceptid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scientificname != null">
+        scientificName = #{record.scientificname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.order != null">
+        order = #{record.order,jdbcType=VARCHAR},
+      </if>
+      <if test="record.family != null">
+        family = #{record.family,jdbcType=VARCHAR},
+      </if>
+      <if test="record.genus != null">
+        genus = #{record.genus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scientificnameauthorship != null">
+        scientificNameAuthorship = #{record.scientificnameauthorship,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vernacularname != null">
+        vernacularName = #{record.vernacularname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verbatimbasisofrecord != null">
+        verbatimBasisOfRecord = #{record.verbatimbasisofrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.species != null">
+        species = #{record.species,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordid != null">
+        recordID = #{record.recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verbatimscientificname != null">
+        verbatimScientificName = #{record.verbatimscientificname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update Clean_data
+    set id = #{record.id,jdbcType=INTEGER},
+      dataResourceUid = #{record.dataresourceuid,jdbcType=VARCHAR},
+      license = #{record.license,jdbcType=VARCHAR},
+      informationWithheld = #{record.informationwithheld,jdbcType=VARCHAR},
+      individualCount = #{record.individualcount,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=VARCHAR},
+      month = #{record.month,jdbcType=VARCHAR},
+      day = #{record.day,jdbcType=VARCHAR},
+      stateProvince = #{record.stateprovince,jdbcType=VARCHAR},
+      decimalLatitude = #{record.decimallatitude,jdbcType=VARCHAR},
+      decimalLongitude = #{record.decimallongitude,jdbcType=VARCHAR},
+      geodeticDatum = #{record.geodeticdatum,jdbcType=VARCHAR},
+      coordinateUncertaintyInMeters = #{record.coordinateuncertaintyinmeters,jdbcType=VARCHAR},
+      verbatimLatitude = #{record.verbatimlatitude,jdbcType=VARCHAR},
+      verbatimLongitude = #{record.verbatimlongitude,jdbcType=VARCHAR},
+      taxonConceptID = #{record.taxonconceptid,jdbcType=VARCHAR},
+      scientificName = #{record.scientificname,jdbcType=VARCHAR},
+      order = #{record.order,jdbcType=VARCHAR},
+      family = #{record.family,jdbcType=VARCHAR},
+      genus = #{record.genus,jdbcType=VARCHAR},
+      scientificNameAuthorship = #{record.scientificnameauthorship,jdbcType=VARCHAR},
+      vernacularName = #{record.vernacularname,jdbcType=VARCHAR},
+      verbatimBasisOfRecord = #{record.verbatimbasisofrecord,jdbcType=VARCHAR},
+      species = #{record.species,jdbcType=VARCHAR},
+      recordID = #{record.recordid,jdbcType=VARCHAR},
+      verbatimScientificName = #{record.verbatimscientificname,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="ie.ta21.habitat.entity.CleanData">
+    update Clean_data
+    <set>
+      <if test="dataresourceuid != null">
+        dataResourceUid = #{dataresourceuid,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null">
+        license = #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="informationwithheld != null">
+        informationWithheld = #{informationwithheld,jdbcType=VARCHAR},
+      </if>
+      <if test="individualcount != null">
+        individualCount = #{individualcount,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null">
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null">
+        day = #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="stateprovince != null">
+        stateProvince = #{stateprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="decimallatitude != null">
+        decimalLatitude = #{decimallatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="decimallongitude != null">
+        decimalLongitude = #{decimallongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="geodeticdatum != null">
+        geodeticDatum = #{geodeticdatum,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinateuncertaintyinmeters != null">
+        coordinateUncertaintyInMeters = #{coordinateuncertaintyinmeters,jdbcType=VARCHAR},
+      </if>
+      <if test="verbatimlatitude != null">
+        verbatimLatitude = #{verbatimlatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="verbatimlongitude != null">
+        verbatimLongitude = #{verbatimlongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="taxonconceptid != null">
+        taxonConceptID = #{taxonconceptid,jdbcType=VARCHAR},
+      </if>
+      <if test="scientificname != null">
+        scientificName = #{scientificname,jdbcType=VARCHAR},
+      </if>
+      <if test="order != null">
+        order = #{order,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null">
+        family = #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="genus != null">
+        genus = #{genus,jdbcType=VARCHAR},
+      </if>
+      <if test="scientificnameauthorship != null">
+        scientificNameAuthorship = #{scientificnameauthorship,jdbcType=VARCHAR},
+      </if>
+      <if test="vernacularname != null">
+        vernacularName = #{vernacularname,jdbcType=VARCHAR},
+      </if>
+      <if test="verbatimbasisofrecord != null">
+        verbatimBasisOfRecord = #{verbatimbasisofrecord,jdbcType=VARCHAR},
+      </if>
+      <if test="species != null">
+        species = #{species,jdbcType=VARCHAR},
+      </if>
+      <if test="recordid != null">
+        recordID = #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="verbatimscientificname != null">
+        verbatimScientificName = #{verbatimscientificname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ie.ta21.habitat.entity.CleanData">
+    update Clean_data
+    set dataResourceUid = #{dataresourceuid,jdbcType=VARCHAR},
+      license = #{license,jdbcType=VARCHAR},
+      informationWithheld = #{informationwithheld,jdbcType=VARCHAR},
+      individualCount = #{individualcount,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR},
+      month = #{month,jdbcType=VARCHAR},
+      day = #{day,jdbcType=VARCHAR},
+      stateProvince = #{stateprovince,jdbcType=VARCHAR},
+      decimalLatitude = #{decimallatitude,jdbcType=VARCHAR},
+      decimalLongitude = #{decimallongitude,jdbcType=VARCHAR},
+      geodeticDatum = #{geodeticdatum,jdbcType=VARCHAR},
+      coordinateUncertaintyInMeters = #{coordinateuncertaintyinmeters,jdbcType=VARCHAR},
+      verbatimLatitude = #{verbatimlatitude,jdbcType=VARCHAR},
+      verbatimLongitude = #{verbatimlongitude,jdbcType=VARCHAR},
+      taxonConceptID = #{taxonconceptid,jdbcType=VARCHAR},
+      scientificName = #{scientificname,jdbcType=VARCHAR},
+      order = #{order,jdbcType=VARCHAR},
+      family = #{family,jdbcType=VARCHAR},
+      genus = #{genus,jdbcType=VARCHAR},
+      scientificNameAuthorship = #{scientificnameauthorship,jdbcType=VARCHAR},
+      vernacularName = #{vernacularname,jdbcType=VARCHAR},
+      verbatimBasisOfRecord = #{verbatimbasisofrecord,jdbcType=VARCHAR},
+      species = #{species,jdbcType=VARCHAR},
+      recordID = #{recordid,jdbcType=VARCHAR},
+      verbatimScientificName = #{verbatimscientificname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
