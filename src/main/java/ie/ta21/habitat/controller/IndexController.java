@@ -1,12 +1,10 @@
 package ie.ta21.habitat.controller;
 
-import ie.ta21.habitat.entity.CleanData;
 import ie.ta21.habitat.entity.TopFiveVO;
 import ie.ta21.habitat.service.AnimalHabitatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -23,7 +21,7 @@ public class IndexController {
 
     @RequestMapping("/foundHabitat")
     public String foundHabitat(Model model) {
-        return "habitat";
+        return "anmialHabitat";
     }
 
     @RequestMapping("/foundAnimal")
