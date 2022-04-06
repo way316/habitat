@@ -14,7 +14,7 @@
                 var lgt = $('input[name="lgt"]').val();
                 var animalName = $('input[name="animalName"]').val();
                 url = url + lat + '/' + lgt + '/' + animalName;
-                console.log('--------------'+ url + '----------------')
+                console.log(url)
                 $.ajax({
                     type: "get",
                     dataType:"json",

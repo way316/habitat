@@ -30,4 +30,9 @@ public class IndexController {
         model.addAttribute("topTwentyAnimals", commonAnimals);
         return "animalDistribution";
     }
+
+    @RequestMapping("home")
+    public String homePage() {
+        return "index";
+    }
 }
