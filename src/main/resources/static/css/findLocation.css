@@ -1,7 +1,10 @@
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
-  height: 100%;
+  height: 600px;
+  /* The height is 400 pixels */
+  width: 1000px;
+  /* The width is the width of the web page */
 }
 
 /* Optional: Makes the sample page fill the window. */
