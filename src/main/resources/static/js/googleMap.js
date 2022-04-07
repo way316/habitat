@@ -1,5 +1,5 @@
 // Initialize and add the map
-function initMap(data) {
+function initMap() {
     const VIC_BOUNDS = {
         north: -34.07,
         south: -39.12,
@@ -20,10 +20,11 @@ function initMap(data) {
             lng: 144
         },
     });
+    console.log(positionList);
     var positions = new Array();
-    for(var i=0;i<data.length;i++){
-        var position = new google.maps.LatLng(data[i].decimallatitude,data[i].decimalLongitude);
-        positions.push(position)
+    for(var i=0;i<positionList.length;i++){
+        var position = new google.maps.LatLng(positionList[i].decimallatitude,positionList[i].decimalLongitude);
+        positions.push(position);
     }
 
     positions.forEach((position) => {

@@ -1,10 +1,12 @@
 package ie.ta21.habitat.controller;
 
+import ie.ta21.habitat.entity.Coordinates;
 import ie.ta21.habitat.entity.TopFiveVO;
 import ie.ta21.habitat.service.AnimalHabitatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -16,12 +18,12 @@ public class IndexController {
 
     @RequestMapping("/index")
     public String index(Model model) {
-        return "mapPage";
+        return "manPage";
     }
 
     @RequestMapping("/foundHabitat")
     public String foundHabitat(Model model) {
-        return "anmialHabitat";
+        return "findLocation";
     }
 
     @RequestMapping("/foundAnimal")
@@ -34,5 +36,13 @@ public class IndexController {
     @RequestMapping("home")
     public String homePage() {
         return "index";
+    }
+
+    @RequestMapping("/findNearbyHabitat/{latitude}/{longitude}/{animalName}")
+    public String findNearbyHabitat(Model model, @PathVariable("latitude") String latitude, @PathVariable("longitude") String longitude, @PathVariable("animalName") String animalName) {
+        List<Coordinates> positionList = animalHabitatService.findNearbyHabitat(latitude,longitude,animalName);
+        model.addAttribute("animalName", animalName);
+        model.addAttribute("positionList",positionList);
+        return "mapPage";
     }
 }

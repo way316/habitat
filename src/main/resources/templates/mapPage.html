@@ -2,30 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
   <head>
+    <base th:href="@{/}">
     <title>Add Map</title>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <script src="../js/googleMap.js"></script>
-    <script>
-      $(document).ready(function(){
-        $("#btn1").click(function(){
-          var url = "/api/findCoordinatesByAnimalName/";
-          var animalName = $('input[name="animalName"]').val();
-          url = url + animalName;
-          $.ajax({
-            type: "get",
-            dataType:"json",
-            url: url,
-            success: function(data){
-              initMap(data);
-            }
-          })
-        });
-        $("#btn2").click(function(){
-          console.info(positions);
-        });
-      });
-    </script>
 
   </head>
   <body>
@@ -44,5 +24,60 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgJnK-1oUKm4c-2hbVMlxw5UHi0YsX3Ls&callback=initMap&v=weekly"
       async
     ></script>
+    <table>
+      <tr>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+      <tr th:each="position:${positionList}">
+        <td th:text="${position.decimallatitude}">Latituded</td>
+        <td th:text="${position.decimalLongitude}">Longituded</td>
+      </tr>
+    </table>
   </body>
+  <script th:inline="javascript">
+    function initMap() {
+      var positionList = [[${positionList}]];
+      const VIC_BOUNDS = {
+        north: -34.07,
+        south: -39.12,
+        west: 140.58,
+        east: 149.57,
+      };
+      west: -36.007154;
+      const infoWindow = new google.maps.InfoWindow();
+      // The map, centered at ??
+      const map = new google.maps.Map(document.getElementById("map"), {
+        restriction: {
+          latLngBounds: VIC_BOUNDS,
+          strictBounds: false,
+        },
+        zoom: 7,
+        center: {
+          lat: -37,
+          lng: 144
+        },
+      });
+      var positions = new Array();
+      for(var i=0;i<positionList.length;i++){
+        var position = new google.maps.LatLng(positionList[i].decimallatitude,positionList[i].decimalLongitude);
+        positions.push(position);
+      }
+
+      positions.forEach((position) => {
+        const marker = new google.maps.Marker({
+          position,
+          map,
+          fontColor: "blue",
+          optimized: false,
+        });
+
+        marker.addListener("click", () => {
+          infoWindow.close();
+          infoWindow.setContent(marker.getTitle());
+          infoWindow.open(marker.getMap(), marker);
+        });
+      });
+    }
+  </script>
 </html>

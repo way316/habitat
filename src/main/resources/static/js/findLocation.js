@@ -1,89 +1,67 @@
-let map;
-let marker;
-let geocoder;
-let responseDiv;
-let response;
-let positionL;
-
+// This sample uses the Place Autocomplete widget to allow the user to search
+// for and select a place. The sample then displays an info window containing
+// the place ID and other information about the place that the user has
+// selected.
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 8,
-    center: { lat: -34.397, lng: 150.644 },
-    mapTypeControl: false,
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -33.8688, lng: 151.2195 },
+    zoom: 13,
   });
-  geocoder = new google.maps.Geocoder();
-
-  const inputText = document.createElement("input");
-
-  inputText.type = "text";
-  inputText.placeholder = "Enter a location";
-
-  const submitButton = document.createElement("input");
-
-  submitButton.type = "button";
-  submitButton.value = "Geocode";
-  submitButton.classList.add("button", "button-primary");
-
-  const clearButton = document.createElement("input");
-
-  clearButton.type = "button";
-  clearButton.value = "Clear";
-  clearButton.classList.add("button", "button-secondary");
-  response = document.createElement("pre");
-  response.id = "response";
-  response.innerText = "";
-  responseDiv = document.createElement("div");
-  responseDiv.id = "response-container";
-  responseDiv.appendChild(response);
-
-  const instructionsElement = document.createElement("p");
-
-  instructionsElement.id = "instructions";
-  instructionsElement.innerHTML =
-      "<strong>Instructions</strong>: Enter an address in the textbox to geocode or click on the map to reverse geocode.";
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
-  map.controls[google.maps.ControlPosition.LEFT_TOP].push(instructionsElement);
-  map.controls[google.maps.ControlPosition.LEFT_TOP].push(responseDiv);
-  marker = new google.maps.Marker({
-    map,
+  const input = document.getElementById("pac-input");
+  // Specify just the place data fields that you need.
+  const autocomplete = new google.maps.places.Autocomplete(input, {
+    fields: ["place_id", "geometry", "formatted_address", "name"],
   });
-  map.addListener("click", (e) => {
-    geocode({ location: e.latLng });
+
+  autocomplete.bindTo("bounds", map);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  const infowindow = new google.maps.InfoWindow();
+  const infowindowContent = document.getElementById("infowindow-content");
+
+  infowindow.setContent(infowindowContent);
+
+  const marker = new google.maps.Marker({ map: map });
+
+  marker.addListener("click", () => {
+    infowindow.open(map, marker);
   });
-  submitButton.addEventListener("click", () =>
-      geocode({ address: inputText.value })
-  );
-  clearButton.addEventListener("click", () => {
-    clear();
+  autocomplete.addListener("place_changed", () => {
+    infowindow.close();
+
+    const place = autocomplete.getPlace();
+
+    if (!place.geometry || !place.geometry.location) {
+      return;
+    }
+
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);
+    }
+    console.log(place.place_id);
+    // Set the position of the marker using the place ID and location.
+    marker.setPlace({
+      placeId: place.place_id,
+      location: place.geometry.location,
+    });
+    marker.setVisible(true);
+    infowindowContent.children.namedItem("place-name").textContent = place.name;
+    infowindowContent.children.namedItem("place-address").textContent =
+        place.formatted_address;
+    infowindow.open(map, marker);
+    var googleUrl = "https://maps.googleapis.com/maps/api/geocode/json?place_id="+place.place_id+"&key=AIzaSyBgJnK-1oUKm4c-2hbVMlxw5UHi0YsX3Ls"
+    $.ajax({
+      url: googleUrl,
+      type: 'GET',
+      success: function(data) {
+        localStorage.setItem("location",data.results[0].geometry.location.lat);
+      }
+    });
   });
-  clear();
 }
-
-function clear() {
-  marker.setMap(null);
-  responseDiv.style.display = "none";
-}
-
-function geocode(request) {
-  clear();
-  geocoder
-      .geocode(request)
-      .then((result) => {
-        const { results } = result;
-
-        map.setCenter(results[0].geometry.location);
-        marker.setPosition(results[0].geometry.location);
-        marker.setMap(map);
-        responseDiv.style.display = "block";
-        response.innerText = JSON.stringify(result, null, 2);
-        console.log(results[0].geometry.location + '====' + 'type is : ' + typeof(results[0].geometry.location) + ', keys: ' + Object.keys(results[0].geometry.location));
-        console.log('latitude: ' + parseInt(results[0].geometry.location['lat']) + ', longtude: ' + results[0].geometry.location['lng'])
-        return results;
-      })
-      .catch((e) => {
-        alert("Geocode was not successful for the following reason: " + e);
-      });
-}
-

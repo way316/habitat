@@ -12,76 +12,36 @@ body {
   padding: 0;
 }
 
-input[type="text"] {
+.controls {
   background-color: #fff;
-  border: 0;
   border-radius: 2px;
-  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-  margin: 10px;
-  padding: 0 0.5em;
-  font: 400 18px Roboto, Arial, sans-serif;
-  overflow: hidden;
-  line-height: 40px;
-  margin-right: 0;
-  min-width: 25%;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 29px;
+  margin-left: 17px;
+  margin-top: 10px;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
 }
 
-input[type="button"] {
-  background-color: #fff;
-  border: 0;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-  margin: 10px;
-  padding: 0 0.5em;
-  font: 400 18px Roboto, Arial, sans-serif;
-  overflow: hidden;
-  height: 40px;
-  cursor: pointer;
-  margin-left: 5px;
-}
-input[type="button"]:hover {
-  background: #ebebeb;
-}
-input[type="button"].button-primary {
-  background-color: #1a73e8;
-  color: white;
-}
-input[type="button"].button-primary:hover {
-  background-color: #1765cc;
-}
-input[type="button"].button-secondary {
-  background-color: white;
-  color: #1a73e8;
-}
-input[type="button"].button-secondary:hover {
-  background-color: #d2e3fc;
+.controls:focus {
+  border-color: #4d90fe;
 }
 
-#response-container {
-  background-color: #fff;
-  border: 0;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-  margin: 10px;
-  padding: 0 0.5em;
-  font: 400 18px Roboto, Arial, sans-serif;
-  overflow: hidden;
-  overflow: auto;
-  max-height: 50%;
-  max-width: 90%;
-  background-color: rgba(255, 255, 255, 0.95);
-  font-size: small;
+.title {
+  font-weight: bold;
 }
 
-#instructions {
-  background-color: #fff;
-  border: 0;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-  margin: 10px;
-  padding: 0 0.5em;
-  font: 400 18px Roboto, Arial, sans-serif;
-  overflow: hidden;
-  padding: 1rem;
-  font-size: medium;
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
 }
