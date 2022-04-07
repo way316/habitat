@@ -44,9 +44,6 @@ function initMap(data) {
 	const geocoder = new google.maps.Geocoder();
 	const infowindow = new google.maps.InfoWindow();
 
-	document.getElementById("submit").addEventListener("click", () => {
-		geocodeLatLng(geocoder, map, infowindow);
-	});
 
 	var positions = new Array();
 	console.log(data);
@@ -54,7 +51,6 @@ function initMap(data) {
 		var position = new google.maps.LatLng(data[i].decimallatitude, data[i].decimalLongitude);
 		positions.push(position)
 	};
-	console.log(positions);
 	positions.forEach((position) => {
 		const marker = new google.maps.Marker({
 			position,

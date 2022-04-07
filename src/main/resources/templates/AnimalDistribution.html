@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>Geocoding Service</title>
+    <base th:href="@{/}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="../css/findLocation.css"/>
+    <script src="../js/findLocation.js"></script>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/homePage.css" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <a class="navbar-brand" href="#!">Animal Helping Hands</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/index">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/findAnimalDistribution">Animal Distribution</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/findAnimal">Find Nearby Habitat</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <div class="text-center text-white">
+                  <!-- Page heading-->
+                  <h1 class="mb-5">Find Animals by location </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</header>
+
+
+<!-- Page Content-->
+<div class="text-center container px-4 px-lg-5">
+    <div style="display: none">
+        <input
+                id="pac-input"
+                class="controls"
+                type="text"
+                placeholder="Enter a location"
+        />
+    </div>
+    <div id="map"></div>
+    <div id="infowindow-content">
+        <span id="place-name" class="title"></span><br/>
+        <strong>Place ID:</strong> <span id="place-id"></span><br/>
+        <span id="place-address"></span>
+    </div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgJnK-1oUKm4c-2hbVMlxw5UHi0YsX3Ls&callback=initMap&libraries=places&v=weekly"
+            async
+    ></script>
+
+    <table class="table" id="table">
+        <thead>
+        <tr>
+            <th width="5%">No</th>
+            <th>Animal Name</th>
+            <th>View button</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+</div>
+<footer class="py-5 bg-dark">
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">TA21 Iteration-1</p>
+    </div>
+</footer>
+</body>
+</html>

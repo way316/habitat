@@ -6,9 +6,23 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 function initMap() {
+  const VIC_BOUNDS = {
+    north: -34.07,
+    south: -39.12,
+    west: 140.58,
+    east: 149.57,
+  };
+  west: -36.007154
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -33.8688, lng: 151.2195 },
-    zoom: 13,
+    restriction: {
+      latLngBounds: VIC_BOUNDS,
+      strictBounds: false,
+    },
+    zoom: 7,
+    center: {
+      lat: -37,
+      lng: 144
+    },
   });
   const input = document.getElementById("pac-input");
   // Specify just the place data fields that you need.
@@ -76,8 +90,9 @@ function initMap() {
       success: function(data) {
         console.log(data);
         for (var i = 0; i<data.length; i++) {
+          var number = i + 1;
           var buttonUrl = "/findNearbyHabitat/"+lat+"/" + lng + "/" + data[i];
-          var tableBody = "<tr><td>" +data[i] + "</td>" + "<td>" +"<a href = '" + buttonUrl +"'><button>Search this animal</button></a>";
+          var tableBody = "<tr><td>" +number + "</td>" +"<td>" + data[i] + "</td>"   + "<td>" +"<a href = '" + buttonUrl +"'><button class='btn btn-dark'>Find Habitat Nearby</button></a>";
           console.log(tableBody);
           $('tbody').append(tableBody);
         }

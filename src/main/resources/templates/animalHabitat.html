@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>Add Map</title>
+    <base th:href="@{/}">
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <script src="../js/animalHabitat.js"></script>
+    <link href="../css/homePage.css" rel="stylesheet"/>
+</head>
+<body>
+
+
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <a class="navbar-brand" href="#!">Animal Helping Hands</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/index">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/findAnimalDistribution">Animal Distribution</a></li>
+                <li class="nav-item"><a class="nav-link " aria-current="page" href="/findAnimal">Find Nearby Habitat</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <input name=“inputBox” id="inputBox" type="text" class="form-control" placeholder="Input an animal...">
+                <div>&nbsp</div>
+                <div>
+                    <button id="submitButton" class="btn btn-primary btn-lg">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</header>
+
+<div class="text-center container px-4 px-lg-5">
+    <div id="map"></div>
+</div>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgJnK-1oUKm4c-2hbVMlxw5UHi0YsX3Ls&callback=initMap&v=weekly"
+        async
+></script>
+
+
+
+<footer class="py-5 bg-dark">
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">TA21 Iteration-1</p>
+    </div>
+</footer>
+</body>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#submitButton").click(function () {
+            var url = "/api/findCoordinatesByAnimalName/";
+            var animalName = $("body").find("#inputBox").val()
+            url = url + animalName;
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: url,
+                success: function (data) {
+                    initMap(data);
+                }
+            })
+        });
+    });
+</script>
+</html>
