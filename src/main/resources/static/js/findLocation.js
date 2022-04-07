@@ -58,10 +58,32 @@ function initMap() {
     var googleUrl = "https://maps.googleapis.com/maps/api/geocode/json?place_id="+place.place_id+"&key=AIzaSyBgJnK-1oUKm4c-2hbVMlxw5UHi0YsX3Ls"
     $.ajax({
       url: googleUrl,
+      async:false,
       type: 'GET',
       success: function(data) {
-        localStorage.setItem("location",data.results[0].geometry.location.lat);
+        console.log(data.results[0].geometry.location);
+        localStorage.setItem("lat",data.results[0].geometry.location.lat);
+        localStorage.setItem("lng",data.results[0].geometry.location.lng);
       }
     });
+    var lat = localStorage.getItem("lat");
+    var lng = localStorage.getItem("lng");
+    var animalListUrl = "/api/findAnimalNamesByLocation/" + lat +"/" + lng;
+    console.log(animalListUrl);
+    $.ajax({
+      url: animalListUrl,
+      type: 'GET',
+      success: function(data) {
+        console.log(data);
+        for (var i = 0; i<data.length; i++) {
+          var buttonUrl = "/findNearbyHabitat/"+lat+"/" + lng + "/" + data[i];
+          var tableBody = "<tr><td>" +data[i] + "</td>" + "<td>" +"<a href = '" + buttonUrl +"'><button>Search this animal</button></a>";
+          console.log(tableBody);
+          $('tbody').append(tableBody);
+        }
+      }
+    });
+
+
   });
 }
