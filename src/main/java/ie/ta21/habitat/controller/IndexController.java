@@ -30,7 +30,7 @@ public class IndexController {
     public String foundAnimal(Model model) {
         List<TopFiveVO> commonAnimals =animalHabitatService.getCommonAnimals();
         model.addAttribute("topTwentyAnimals", commonAnimals);
-        return "animalDistribution";
+        return "AnimalDistribution";
     }
 
     @RequestMapping("/findAnimalDistribution")
