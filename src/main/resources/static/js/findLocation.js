@@ -40,7 +40,7 @@ function initMap() {
 
   instructionsElement.id = "instructions";
   instructionsElement.innerHTML =
-    "<strong>Instructions</strong>: Enter an address in the textbox to geocode or click on the map to reverse geocode.";
+      "<strong>Instructions</strong>: Enter an address in the textbox to geocode or click on the map to reverse geocode.";
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
@@ -53,7 +53,7 @@ function initMap() {
     geocode({ location: e.latLng });
   });
   submitButton.addEventListener("click", () =>
-    geocode({ address: inputText.value })
+      geocode({ address: inputText.value })
   );
   clearButton.addEventListener("click", () => {
     clear();
@@ -69,24 +69,21 @@ function clear() {
 function geocode(request) {
   clear();
   geocoder
-    .geocode(request)
-    .then((result) => {
-      const { results } = result;
+      .geocode(request)
+      .then((result) => {
+        const { results } = result;
 
-      map.setCenter(results[0].geometry.location);
-      marker.setPosition(results[0].geometry.location);
-      marker.setMap(map);
-      responseDiv.style.display = "block";
-      response.innerText = JSON.stringify(result, null, 2);
-	  var postionL = results[0].geometry.location;
-	  var lat = parseInt(positionL[0]);
-	  var lng = parseInt(positionL[1]);
-	  console.log(lat + '------------' + lng);
-      return results;
-    })
-    .catch((e) => {
-      alert("Geocode was not successful for the following reason: " + e);
-    });
+        map.setCenter(results[0].geometry.location);
+        marker.setPosition(results[0].geometry.location);
+        marker.setMap(map);
+        responseDiv.style.display = "block";
+        response.innerText = JSON.stringify(result, null, 2);
+        console.log(results[0].geometry.location + '====' + 'type is : ' + typeof(results[0].geometry.location) + ', keys: ' + Object.keys(results[0].geometry.location));
+        console.log('latitude: ' + parseInt(results[0].geometry.location['lat']) + ', longtude: ' + results[0].geometry.location['lng'])
+        return results;
+      })
+      .catch((e) => {
+        alert("Geocode was not successful for the following reason: " + e);
+      });
 }
 
-	
