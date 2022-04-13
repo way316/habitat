@@ -7,7 +7,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <base th:href="@{/}">
-    <title>About</title>
+    <title>Rescue</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="../image/favicon.ico"/>
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="/index">Home</a></li>
-                <li class="nav-item"><a class="nav-link active" href="/about">About us</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/about">Rescue</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="/findAnimalDistribution">Animal Distribution</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="/findAnimal">Find Nearby Habitat</a></li>
             </ul>
@@ -37,18 +37,26 @@
 <div class="container px-4 px-lg-5">
     <!-- Heading Row-->
     <div class="row gx-4 gx-lg-5 align-items-center my-5">
-        <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0"
-                                   src="https://images.pexels.com/photos/1634845/pexels-photo-1634845.jpeg?cs=srgb&dl=pexels-vlad-bagacian-1634845.jpg&fm=jpg"
+        <div class="col-lg-6"><img class="img-fluid rounded mb-4 mb-lg-0"
+                                   src="https://s4.aconvert.com/convert/p3r68-cdx67/aa7hw-v4kj0.webp"
                                    alt="..."/>
         </div>
 
-        <div class="col-lg-5">
-            <h1 class="font-weight-light">About Us</h1>
-            <p>Australia's bushfire killed millions of animals and destroyed land animals' habitats. We must protect and
-                help the surviving animals. We need to be well prepared to be ready to help the affected animal whenever
-                bushfires happen again in the future. The tool helps volunteers and organizations find new homes for
-                animals whose habitats have been destroyed . </p>
+        <div class="col-lg-6">
+            <h1 class="font-weight-light">Rescue</h1>
+            <p>When you spot an animal that needs rescue. . .</p>
+            <p>Step 1: Find the animal habitat closest to you.
+            </a>
+            <a href="/findAnimal">
+                <button class="btn btn-primary " id="submitButton" type="submit">
+                    Find Nearby Habitat
+                </button>
+            </a>
+            </p>
+            <p>Step 2: Move the injured animal to a new address</p>
+            <p>Step 3: Report to animal protection agency</p>
         </div>
+
     </div>
 </div>
 

@@ -23,7 +23,7 @@ public class IndexController {
 
     @RequestMapping("/about")
     public String foundHabitat(Model model) {
-        return "about";
+        return "Rescue";
     }
 
     @RequestMapping("/findAnimal")
