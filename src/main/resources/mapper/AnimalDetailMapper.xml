@@ -97,6 +97,10 @@
     from animal_detail
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getInfoByName" resultType="ie.ta21.habitat.entity.AnimalDetail">
+    SELECT brief_description, description, habitat_info, habitat_types, diet, biology, distribution, native_status, commercial_species, colours FROM animal_detail WHERE vernacular_name LIKE "%"#{name}"%";
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from animal_detail
     where id = #{id,jdbcType=INTEGER}

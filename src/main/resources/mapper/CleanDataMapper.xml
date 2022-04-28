@@ -61,6 +61,9 @@
   <select id="selectTop20" resultType="ie.ta21.habitat.entity.TopFiveVO">
     SELECT vernacularName, count(*) AS count FROM Clean_data GROUP BY vernacularName ORDER BY count DESC LIMIT 20;
   </select>
+  <select id="selectAnimalName" resultType="ie.ta21.habitat.entity.AnimalName">
+    SELECT DISTINCT vernacularName FROM Clean_data;
+  </select>
   <select id="getCoordinatesByName" resultType="ie.ta21.habitat.entity.Coordinates">
     SELECT decimalLatitude, decimalLongitude FROM Clean_data WHERE vernacularName LIKE "%"#{name}"%" LIMIT 100;
   </select>

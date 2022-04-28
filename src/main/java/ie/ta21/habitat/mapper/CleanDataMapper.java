@@ -1,10 +1,8 @@
 package ie.ta21.habitat.mapper;
 
 import java.util.List;
-import ie.ta21.habitat.entity.CleanData;
-import ie.ta21.habitat.entity.CleanDataExample;
-import ie.ta21.habitat.entity.Coordinates;
-import ie.ta21.habitat.entity.TopFiveVO;
+
+import ie.ta21.habitat.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -33,6 +31,8 @@ public interface CleanDataMapper {
     int updateByPrimaryKey(CleanData record);
 
     List<TopFiveVO> selectTop20();
+
+    List<AnimalName> selectAnimalName();
 
     List<Coordinates> getCoordinatesByName(String name);
 
