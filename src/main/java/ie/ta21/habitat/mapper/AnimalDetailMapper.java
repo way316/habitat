@@ -1,5 +1,5 @@
 package ie.ta21.habitat.mapper;
-import ie.ta21.habitat.entity.AnimalInfo;
+
 import ie.ta21.habitat.entity.AnimalDetail;
 import ie.ta21.habitat.entity.AnimalDetailExample;
 import java.util.List;
@@ -20,8 +20,6 @@ public interface AnimalDetailMapper {
     int insertSelective(AnimalDetail record);
 
     List<AnimalDetail> selectByExample(AnimalDetailExample example);
-
-    List<AnimalInfo> getInfoByName(String name);
 
     AnimalDetail selectByPrimaryKey(Integer id);
 

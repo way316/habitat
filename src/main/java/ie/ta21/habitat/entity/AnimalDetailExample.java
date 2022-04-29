@@ -444,73 +444,73 @@ public class AnimalDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andHabitatIsNull() {
-            addCriterion("habitat is null");
+        public Criteria andHabitatInfoIsNull() {
+            addCriterion("habitat_info is null");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatIsNotNull() {
-            addCriterion("habitat is not null");
+        public Criteria andHabitatInfoIsNotNull() {
+            addCriterion("habitat_info is not null");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatEqualTo(String value) {
-            addCriterion("habitat =", value, "habitat");
+        public Criteria andHabitatInfoEqualTo(String value) {
+            addCriterion("habitat_info =", value, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatNotEqualTo(String value) {
-            addCriterion("habitat <>", value, "habitat");
+        public Criteria andHabitatInfoNotEqualTo(String value) {
+            addCriterion("habitat_info <>", value, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatGreaterThan(String value) {
-            addCriterion("habitat >", value, "habitat");
+        public Criteria andHabitatInfoGreaterThan(String value) {
+            addCriterion("habitat_info >", value, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatGreaterThanOrEqualTo(String value) {
-            addCriterion("habitat >=", value, "habitat");
+        public Criteria andHabitatInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("habitat_info >=", value, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatLessThan(String value) {
-            addCriterion("habitat <", value, "habitat");
+        public Criteria andHabitatInfoLessThan(String value) {
+            addCriterion("habitat_info <", value, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatLessThanOrEqualTo(String value) {
-            addCriterion("habitat <=", value, "habitat");
+        public Criteria andHabitatInfoLessThanOrEqualTo(String value) {
+            addCriterion("habitat_info <=", value, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatLike(String value) {
-            addCriterion("habitat like", value, "habitat");
+        public Criteria andHabitatInfoLike(String value) {
+            addCriterion("habitat_info like", value, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatNotLike(String value) {
-            addCriterion("habitat not like", value, "habitat");
+        public Criteria andHabitatInfoNotLike(String value) {
+            addCriterion("habitat_info not like", value, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatIn(List<String> values) {
-            addCriterion("habitat in", values, "habitat");
+        public Criteria andHabitatInfoIn(List<String> values) {
+            addCriterion("habitat_info in", values, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatNotIn(List<String> values) {
-            addCriterion("habitat not in", values, "habitat");
+        public Criteria andHabitatInfoNotIn(List<String> values) {
+            addCriterion("habitat_info not in", values, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatBetween(String value1, String value2) {
-            addCriterion("habitat between", value1, value2, "habitat");
+        public Criteria andHabitatInfoBetween(String value1, String value2) {
+            addCriterion("habitat_info between", value1, value2, "habitatInfo");
             return (Criteria) this;
         }
 
-        public Criteria andHabitatNotBetween(String value1, String value2) {
-            addCriterion("habitat not between", value1, value2, "habitat");
+        public Criteria andHabitatInfoNotBetween(String value1, String value2) {
+            addCriterion("habitat_info not between", value1, value2, "habitatInfo");
             return (Criteria) this;
         }
 
@@ -795,72 +795,72 @@ public class AnimalDetailExample {
         }
 
         public Criteria andHabitatTypesIsNull() {
-            addCriterion("\"habitat types\" is null");
+            addCriterion("habitat_types is null");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesIsNotNull() {
-            addCriterion("\"habitat types\" is not null");
+            addCriterion("habitat_types is not null");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesEqualTo(String value) {
-            addCriterion("\"habitat types\" =", value, "habitatTypes");
+            addCriterion("habitat_types =", value, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesNotEqualTo(String value) {
-            addCriterion("\"habitat types\" <>", value, "habitatTypes");
+            addCriterion("habitat_types <>", value, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesGreaterThan(String value) {
-            addCriterion("\"habitat types\" >", value, "habitatTypes");
+            addCriterion("habitat_types >", value, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesGreaterThanOrEqualTo(String value) {
-            addCriterion("\"habitat types\" >=", value, "habitatTypes");
+            addCriterion("habitat_types >=", value, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesLessThan(String value) {
-            addCriterion("\"habitat types\" <", value, "habitatTypes");
+            addCriterion("habitat_types <", value, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesLessThanOrEqualTo(String value) {
-            addCriterion("\"habitat types\" <=", value, "habitatTypes");
+            addCriterion("habitat_types <=", value, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesLike(String value) {
-            addCriterion("\"habitat types\" like", value, "habitatTypes");
+            addCriterion("habitat_types like", value, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesNotLike(String value) {
-            addCriterion("\"habitat types\" not like", value, "habitatTypes");
+            addCriterion("habitat_types not like", value, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesIn(List<String> values) {
-            addCriterion("\"habitat types\" in", values, "habitatTypes");
+            addCriterion("habitat_types in", values, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesNotIn(List<String> values) {
-            addCriterion("\"habitat types\" not in", values, "habitatTypes");
+            addCriterion("habitat_types not in", values, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesBetween(String value1, String value2) {
-            addCriterion("\"habitat types\" between", value1, value2, "habitatTypes");
+            addCriterion("habitat_types between", value1, value2, "habitatTypes");
             return (Criteria) this;
         }
 
         public Criteria andHabitatTypesNotBetween(String value1, String value2) {
-            addCriterion("\"habitat types\" not between", value1, value2, "habitatTypes");
+            addCriterion("habitat_types not between", value1, value2, "habitatTypes");
             return (Criteria) this;
         }
 

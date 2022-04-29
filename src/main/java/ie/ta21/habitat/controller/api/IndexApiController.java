@@ -1,6 +1,5 @@
 package ie.ta21.habitat.controller.api;
 
-import ie.ta21.habitat.entity.AnimalInfo;
 import ie.ta21.habitat.entity.Coordinates;
 import ie.ta21.habitat.service.AnimalHabitatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +26,6 @@ public class IndexApiController {
         return coordinatesList;
     }
 
-    @RequestMapping("/findInfoByName/{animalName}")
-    public List<AnimalInfo> findInfoByName (@PathVariable("animalName") String animalName) {
-        List<AnimalInfo> animalInfoList = new ArrayList<>();
-        if (animalName == null) {
-            return animalInfoList;
-        }
-        animalInfoList = animalHabitatService.getAnimalInfo(animalName);
-        return animalInfoList;
-    }
 
     @RequestMapping("/findAnimalNamesByLocation/{latitude}/{longitude}")
     public List<String> findAnimalListByCoordinates (@PathVariable("latitude") String latitude, @PathVariable("longitude") String longitude) {

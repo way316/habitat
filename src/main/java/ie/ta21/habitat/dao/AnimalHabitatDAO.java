@@ -13,22 +13,19 @@ public class AnimalHabitatDAO {
     @Autowired
     CleanDataMapper cleanDataMapper;
 
-
-    public List<TopFiveVO> getTopAnimals() {
-        return cleanDataMapper.selectTop20();
+    public List<String> getNameList() {
+        return cleanDataMapper.selectNames();
     }
-
-    public List<AnimalName> getVernacularName() { return cleanDataMapper.selectAnimalName();}
 
     public List<Coordinates> getCoordinatesByName(String name) {
         return cleanDataMapper.getCoordinatesByName(name);
     }
 
     public List<String> getAnimalByCoordinates(String latitude, String longitude) {
-        return cleanDataMapper.getAnimalByCoordinates(latitude,longitude);
+        return cleanDataMapper.getAnimalByCoordinates(latitude, longitude);
     }
 
     public List<Coordinates> findNearbyHabitat(String latitude, String longitude, String animalName) {
-        return cleanDataMapper.getNearbyHabitat(latitude,longitude,animalName);
+        return cleanDataMapper.getNearbyHabitat(latitude, longitude, animalName);
     }
 }

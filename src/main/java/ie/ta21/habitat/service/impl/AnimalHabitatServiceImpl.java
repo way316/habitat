@@ -13,18 +13,16 @@ import java.util.List;
 public class AnimalHabitatServiceImpl implements AnimalHabitatService {
     @Autowired
     AnimalHabitatDAO animalHabitatDAO;
+    @Autowired
     AnimalInfoDAO animalInfoDAO;
 
     @Override
-    public List<TopFiveVO> getCommonAnimals() {
-        return animalHabitatDAO.getTopAnimals();
+    public List<String> getAnimalNames() {
+        return animalHabitatDAO.getNameList();
     }
 
     @Override
-    public List<AnimalName> getAnimalName() { return animalHabitatDAO.getVernacularName();}
-
-    @Override
-    public List<AnimalInfo> getAnimalInfo(String name) { return animalInfoDAO.getAnimalInformation(name);}
+    public AnimalDetail getAnimalInfo(String name) { return animalInfoDAO.getAnimalInformation(name);}
 
     @Override
     public List<Coordinates> findCoordinatesByName(String name) {

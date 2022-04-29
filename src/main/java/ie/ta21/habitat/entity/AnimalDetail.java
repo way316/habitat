@@ -11,7 +11,7 @@ public class AnimalDetail {
 
     private String biology;
 
-    private String habitat;
+    private String habitatInfo;
 
     private String nativeStatus;
 
@@ -65,12 +65,12 @@ public class AnimalDetail {
         this.biology = biology == null ? null : biology.trim();
     }
 
-    public String getHabitat() {
-        return habitat;
+    public String getHabitatInfo() {
+        return habitatInfo;
     }
 
-    public void setHabitat(String habitat) {
-        this.habitat = habitat == null ? null : habitat.trim();
+    public void setHabitatInfo(String habitatInfo) {
+        this.habitatInfo = habitatInfo == null ? null : habitatInfo.trim();
     }
 
     public String getNativeStatus() {

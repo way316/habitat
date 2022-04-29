@@ -30,9 +30,7 @@ public interface CleanDataMapper {
 
     int updateByPrimaryKey(CleanData record);
 
-    List<TopFiveVO> selectTop20();
-
-    List<AnimalName> selectAnimalName();
+    List<String> selectNames();
 
     List<Coordinates> getCoordinatesByName(String name);
 
