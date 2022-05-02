@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
 <head>
-    <title>Find Habitat</title>
+    <title>Animal Detail</title>
     <base th:href="@{/}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" type="text/css" href="../css/findLocation.css"/>
-    <script src="../js/findLocation.js"></script>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/homePage.css" rel="stylesheet"/>
@@ -40,46 +38,55 @@
             <div class="col-xl-6">
                 <div class="text-center text-white">
                     <!-- Page heading-->
-                    <h1 class="mb-5">Find Animals by location </h1>
-                    <p>You can enter your location to find nearby animals and their habitats, </p>
-                    <p>so that you can choose the nearest habitat to move animals to.</p>
+                    <h1 class="mb-5" th:text="${animalInfo.vernacularName} + ' Details'"></h1>
                 </div>
             </div>
         </div>
     </div>
     </div>
 </header>
+<div>&nbsp</div>
+<div class="container px-4 px-lg-5">
+    <table class="table table-bordered " width="100%">
+        <tbody>
+        <tr>
+            <th width="15%">Name</th>
+            <td width="35%" th:text="${animalInfo.vernacularName}"></td>
+            <th width="15%">Diet</th>
+            <td width="35%" th:text="${animalInfo.diet}"></td>
+        </tr>
+        <tr>
+            <th width="15%">Native Status</th>
+            <td width="35%" th:text="${animalInfo.nativeStatus}"></td>
+            <th width="15%">Colours</th>
+            <td width="35%" th:text="${animalInfo.colours}"></td>
+        </tr>
+        <tr>
+            <th width="15%">Description</th>
+            <td colspan="3" th:text="${animalInfo.description}"></td>
+        </tr>
+        <tr>
+            <th width="15%">Biology</th>
+            <td colspan="3" th:text="${animalInfo.biology}"></td>
+        </tr>
+        <tr>
+            <th width="15%">Habitat</th>
+            <td colspan="3" th:text="${animalInfo.habitatInfo}"></td>
+        </tr>
 
-
-<!-- Page Content-->
-<div class="text-center container px-4 px-lg-5">
-    <div style="display: none">
-        <input
-                id="pac-input"
-                class="controls"
-                type="text"
-                placeholder="Enter a location"
-        />
-    </div>x`
-    <div id="map"></div>
-    <div id="infowindow-content">
-        <span id="place-name" class="title"></span><br/>
-        <strong>Place ID:</strong> <span id="place-id"></span><br/>
-        <span id="place-address"></span>
-    </div>
-
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgJnK-1oUKm4c-2hbVMlxw5UHi0YsX3Ls&callback=initMap&libraries=places&v=weekly"
-            async
-    ></script>
-
-    <table class="table" id="table">
-        <thead id="thead">
-        </thead>
-        <tbody id="tbody">
+        <tr>
+            <th width="15%">Distribution</th>
+            <td colspan="3" th:text="${animalInfo.distribution}"></td>
+        </tr>
         </tbody>
     </table>
+    <div>&nbsp</div>
+    <a href="/findAnimalDistribution">
+        <button class="btn btn-dark" id="submitButton" type="submit">
+            See Distribution
+        </button>
+    </a>
+    <div>&nbsp</div>
 </div>
 
 <footer class="py-5 bg-dark">

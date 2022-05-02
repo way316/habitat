@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -32,18 +30,18 @@ public class IndexController {
         return "AnimalDistribution";
     }
 
-    @RequestMapping("/findInfoByName/{animalName}")
+
+    @RequestMapping("/findAnimalInfo/{animalName}")
     public String findInfoByName (@PathVariable("animalName") String animalName, Model model) {
         AnimalDetail animalInfo = animalHabitatService.getAnimalInfo(animalName);
         model.addAttribute("animalInfo",animalInfo);
-        return "info";
+        return "animalDetail";
     }
-
 
     @RequestMapping("/findAnimalDistribution")
     public String findAnimalDistribution(Model model) {
         List<String> commonAnimals = animalHabitatService.getAnimalNames();
-        model.addAttribute("topTwentyAnimals", commonAnimals);
+        model.addAttribute("commonAnimals", commonAnimals);
         return "animalHabitat";
     }
 
@@ -54,4 +52,5 @@ public class IndexController {
         model.addAttribute("positionList",positionList);
         return "mapPage";
     }
+
 }

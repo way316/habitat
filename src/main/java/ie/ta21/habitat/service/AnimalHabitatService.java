@@ -9,7 +9,7 @@ public interface AnimalHabitatService {
 
     List<Coordinates> findCoordinatesByName(String name);
 
-    List<String> findAnimalByCoordinates(String latitude, String longitude);
+    List<FindAnimalListByCoordinatesVO> findAnimalByCoordinates(String latitude, String longitude);
 
     List<Coordinates> findNearbyHabitat(String latitude, String longitude, String animalName);
 

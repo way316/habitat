@@ -1,6 +1,7 @@
 package ie.ta21.habitat.controller.api;
 
 import ie.ta21.habitat.entity.Coordinates;
+import ie.ta21.habitat.entity.FindAnimalListByCoordinatesVO;
 import ie.ta21.habitat.service.AnimalHabitatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +29,11 @@ public class IndexApiController {
 
 
     @RequestMapping("/findAnimalNamesByLocation/{latitude}/{longitude}")
-    public List<String> findAnimalListByCoordinates (@PathVariable("latitude") String latitude, @PathVariable("longitude") String longitude) {
+    public List<FindAnimalListByCoordinatesVO> findAnimalListByCoordinates (@PathVariable("latitude") String latitude, @PathVariable("longitude") String longitude) {
         if (latitude == null | longitude == null) {
             return null;
         }
-        List<String> animalList = animalHabitatService.findAnimalByCoordinates(latitude,longitude);
+        List<FindAnimalListByCoordinatesVO> animalList = animalHabitatService.findAnimalByCoordinates(latitude,longitude);
         return animalList;
     }
 
