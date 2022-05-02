@@ -3,7 +3,7 @@
 <html>
 <head>
     <base th:href="@{/}">
-    <title>Add Map</title>
+    <title>Nearby Habitat</title>
     <script src="../js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../css/homePage.css"/>
@@ -59,6 +59,9 @@
 <script th:inline="javascript">
     function initMap() {
         var positionList = [[${positionList}]];
+        var latitude = [[${latitude}]];
+        var longitude = [[${longitude}]];
+        console.log(latitude);
         const VIC_BOUNDS = {
             north: -34.07,
             south: -39.12,
@@ -72,10 +75,10 @@
                 latLngBounds: VIC_BOUNDS,
                 strictBounds: false,
             },
-            zoom: 7,
+            zoom: 11,
             center: {
-                lat: -37,
-                lng: 144
+                lat: parseFloat(latitude),
+                lng: parseFloat(longitude)
             },
         });
         var positions = new Array();
@@ -83,7 +86,7 @@
             var position = new google.maps.LatLng(positionList[i].decimallatitude, positionList[i].decimalLongitude);
             positions.push(position);
         }
-
+        const geocoder = new google.maps.Geocoder();
         positions.forEach((position) => {
             console.log(position);
             const marker = new google.maps.Marker({
@@ -93,13 +96,18 @@
                 title: "uluru",
                 optimized: false,
             });
-            const infoWindow = new google.maps.InfoWindow({content: "<p>Marker Location:" + marker.getPosition() + "</p>",});
-
-            marker.addListener("click", () => {
-                infoWindow.close();
-                infoWindow.open(marker.getMap(), marker);
-            });
+            geocoder
+                .geocode({ location: position })
+                .then((response) => {
+                    if (response.results[0]) {
+                        console.log(response.results[0]);
+                        const infoWindow = new google.maps.InfoWindow({content: response.results[0].formatted_address});
+                        marker.addListener("click", () => {
+                            infoWindow.close();
+                            infoWindow.open(marker.getMap(), marker);
+                        });
+                    }});
         });
-    }
+    };
 </script>
 </html>

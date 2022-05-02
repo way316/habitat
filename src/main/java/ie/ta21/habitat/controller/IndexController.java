@@ -50,6 +50,8 @@ public class IndexController {
         List<Coordinates> positionList = animalHabitatService.findNearbyHabitat(latitude,longitude,animalName);
         model.addAttribute("animalName", animalName);
         model.addAttribute("positionList",positionList);
+        model.addAttribute("longitude",longitude);
+        model.addAttribute("latitude",latitude);
         return "mapPage";
     }
 
