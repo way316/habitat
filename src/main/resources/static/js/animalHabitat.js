@@ -51,6 +51,7 @@ function initMap(data) {
 		var position = new google.maps.LatLng(data[i].decimallatitude, data[i].decimalLongitude);
 		positions.push(position)
 	};
+
 	positions.forEach((position) => {
 		const marker = new google.maps.Marker({
 			position,
@@ -60,8 +61,6 @@ function initMap(data) {
 		})
 	});
 }
-
-
 
 
 function geocodeLatLng(geocoder, map, infowindow) {

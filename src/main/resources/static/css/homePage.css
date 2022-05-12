@@ -76,22 +76,6 @@
   }
 }
 
-#header .logo {
-  font-size: 28px;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-#header .logo a {
-  color: #555555;
-}
-#header .logo img {
-  max-height: 40px;
-}
-
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -516,7 +500,7 @@ progress {
 }
 
 .lead {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 
@@ -3149,7 +3133,7 @@ textarea.form-control-lg {
 }
 
 .btn-info {
-  color: #000;
+  color: #fff;
   background-color: #0dcaf0;
   border-color: #0dcaf0;
 }
