@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <style>
+        #map {
+            height: 80%;
+        }
+
+        html, body {
+            height: 80%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
     <title>Animal Detail</title>
     <base th:href="@{/}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -8,6 +19,7 @@
     <script src="../js/jquery-3.6.0.min.js"></script>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../css/homePage.css" rel="stylesheet"/>
+    <script src="../js/animalHabitat.js"></script>
 </head>
 <body>
 
@@ -52,18 +64,25 @@
         <tr>
             <th width="15%">Name</th>
             <td width="35%" th:text="${animalInfo.vernacularName}"></td>
-            <th width="15%">Diet</th>
-            <td width="35%" th:text="${animalInfo.diet}"></td>
+            <td rowspan="5" width="50%">
+                <image th:src="'../image/animals/'+ ${animalInfo.vernacularName}+.jpg"></image>
+            </td>
         </tr>
         <tr>
             <th width="15%">Native Status</th>
             <td width="35%" th:text="${animalInfo.nativeStatus}"></td>
+        </tr>
+        <tr>
             <th width="15%">Colours</th>
             <td width="35%" th:text="${animalInfo.colours}"></td>
         </tr>
         <tr>
+            <th width="15%">Diet</th>
+            <td width="35%" th:text="${animalInfo.diet}"></td>
+        </tr>
+        <tr>
             <th width="15%">Description</th>
-            <td colspan="3" th:text="${animalInfo.description}"></td>
+            <td th:text="${animalInfo.description}"></td>
         </tr>
         <tr>
             <th width="15%">Biology</th>
@@ -78,21 +97,42 @@
             <th width="15%">Distribution</th>
             <td colspan="3" th:text="${animalInfo.distribution}"></td>
         </tr>
+        <tr>
+            <th width="15%">Distribution in VIC</th>
+            <td colspan="10">
+                <div id="map"></div>
+            </td>
+        </tr>
         </tbody>
     </table>
     <div>&nbsp</div>
     <a href="/findAnimalDistribution">
         <button class="btn btn-dark" id="submitButton" type="submit">
-            See Distribution
+            Back to Feeding
         </button>
     </a>
     <div>&nbsp</div>
 </div>
 
 <footer class="py-5 bg-dark">
-    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white"><img src="../image/logo1.jpg" width="45px" height="45px">Kangaroo Developer</p>
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white"><img src="../image/logo1.jpg" width="45px"
+                                                                                   height="45px">Kangaroo Developer</p>
     </div>
 </footer>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgJnK-1oUKm4c-2hbVMlxw5UHi0YsX3Ls&callback=initMap&v=weekly"
+></script>
 </body>
+<script th:inline="javascript">
+    var animalName = [[${animalInfo.vernacularName}]]
+    var url = "/api/findCoordinatesByAnimalName/";
+    url = url + animalName;
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        url: url,
+        success: function (data) {
+            initMap(data);
+        }
+    })
+</script>
 </html>

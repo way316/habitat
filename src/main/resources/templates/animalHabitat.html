@@ -51,7 +51,6 @@
                 </select>
                 <div>&nbsp</div>
                 <div>
-                    <button id="submitButton" class="btn btn-primary btn-lg">Search</button>
                     <button id="detailButton" class="btn btn-primary btn-lg">Details</button>
                 </div>
             </div>
@@ -59,14 +58,6 @@
     </div>
     </div>
 </header>
-
-<div class="text-center container px-4 px-lg-5">
-    <div id="map"></div>
-</div>
-<script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgJnK-1oUKm4c-2hbVMlxw5UHi0YsX3Ls&callback=initMap&v=weekly"
-        async
-></script>
 
 
 <footer class="py-5 bg-dark">
@@ -88,20 +79,6 @@
                 herf = "/findAnimalInfo/" + animalName;
                 window.location.href="/findAnimalInfo/" + animalName;
             }
-        });
-        $("#submitButton").click(function () {
-            var url = "/api/findCoordinatesByAnimalName/";
-            var animalName = $("#inputBox option:selected").text();
-            console.log(animalName);
-            url = url + animalName;
-            $.ajax({
-                type: "get",
-                dataType: "json",
-                url: url,
-                success: function (data) {
-                    initMap(data);
-                }
-            })
         });
     });
 </script>

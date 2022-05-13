@@ -44,22 +44,23 @@ function initMap(data) {
 	const geocoder = new google.maps.Geocoder();
 	const infowindow = new google.maps.InfoWindow();
 
+	if (data != null) {
+		var positions = new Array();
+		console.log(data);
+		for (var i = 0; i < data.length; i++) {
+			var position = new google.maps.LatLng(data[i].decimallatitude, data[i].decimalLongitude);
+			positions.push(position)
+		};
 
-	var positions = new Array();
-	console.log(data);
-	for (var i = 0; i < data.length; i++) {
-		var position = new google.maps.LatLng(data[i].decimallatitude, data[i].decimalLongitude);
-		positions.push(position)
-	};
-
-	positions.forEach((position) => {
-		const marker = new google.maps.Marker({
-			position,
-			map,
-			fontColor: "blue",
-			optimized: false,
-		})
-	});
+		positions.forEach((position) => {
+			const marker = new google.maps.Marker({
+				position,
+				map,
+				fontColor: "blue",
+				optimized: false,
+			})
+		});
+	}
 }
 
 
