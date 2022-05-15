@@ -933,6 +933,76 @@ public class AnimalDetailExample {
             addCriterion("commercial_species not between", value1, value2, "commercialSpecies");
             return (Criteria) this;
         }
+
+        public Criteria andEnDangerIsNull() {
+            addCriterion("En_danger is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerIsNotNull() {
+            addCriterion("En_danger is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerEqualTo(String value) {
+            addCriterion("En_danger =", value, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerNotEqualTo(String value) {
+            addCriterion("En_danger <>", value, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerGreaterThan(String value) {
+            addCriterion("En_danger >", value, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerGreaterThanOrEqualTo(String value) {
+            addCriterion("En_danger >=", value, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerLessThan(String value) {
+            addCriterion("En_danger <", value, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerLessThanOrEqualTo(String value) {
+            addCriterion("En_danger <=", value, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerLike(String value) {
+            addCriterion("En_danger like", value, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerNotLike(String value) {
+            addCriterion("En_danger not like", value, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerIn(List<String> values) {
+            addCriterion("En_danger in", values, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerNotIn(List<String> values) {
+            addCriterion("En_danger not in", values, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerBetween(String value1, String value2) {
+            addCriterion("En_danger between", value1, value2, "enDanger");
+            return (Criteria) this;
+        }
+
+        public Criteria andEnDangerNotBetween(String value1, String value2) {
+            addCriterion("En_danger not between", value1, value2, "enDanger");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

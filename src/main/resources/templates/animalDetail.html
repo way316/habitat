@@ -12,7 +12,10 @@
             padding: 0;
         }
     </style>
-    <title>Animal Detail</title>
+    <title>Animal Details- Animal Helping Hands</title>
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../image/icon.png"/>
     <base th:href="@{/}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" type="text/css" href="../css/findLocation.css"/>
@@ -64,9 +67,13 @@
         <tr>
             <th width="15%">Name</th>
             <td width="35%" th:text="${animalInfo.vernacularName}"></td>
-            <td rowspan="5" width="50%">
+            <td rowspan="6" width="50%">
                 <image th:src="'../image/animals/'+ ${animalInfo.vernacularName}+.jpg"></image>
             </td>
+        </tr>
+        <tr>
+            <th width="15%">Endangered</th>
+            <td width="35%" th:text="${animalInfo.enDanger}"></td>
         </tr>
         <tr>
             <th width="15%">Native Status</th>

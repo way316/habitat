@@ -92,6 +92,7 @@ function initMap() {
                 $('thead').append("        <tr>\n" +
                     "            <th width=\"5%\">No</th>\n" +
                     "            <th>Animal Name</th>\n" +
+                    "            <th>Image</th>\n" +
                     "            <th>Animal Description</th>\n" +
                     "            <th>View button</th>\n" +
                     "            </tr>");
@@ -99,7 +100,11 @@ function initMap() {
                     var number = i + 1;
                     var buttonUrl = "/findNearbyHabitat/" + lat + "/" + lng + "/" + data[i].animalName;
                     var nameUrl = "/findAnimalInfo/" + data[i].animalName;
-                    var tableBody = "<tr><td>" + number + "</td>"  +"<td>" + "<a href ='" + nameUrl +"' class = 'text-dark'>" + data[i].animalName + "</a></td>" +"<td>" + data[i].animalDescription + "</td>" + "<td>" + "<a href = '" + buttonUrl + "'><button class='btn btn-dark'>Find Habitat Nearby</button></a>";
+                    var animalName = data[i].animalName;
+                    animalName = animalName.replaceAll(" ", "%20");
+                    console.log(animalName);
+                    var pictureUrl = "../image/animals/" + animalName + ".jpg";
+                    var tableBody = "<tr><td>" + number + "</td>" + "<td>" + "<a href ='" + nameUrl + "' class = 'text-dark'>" + data[i].animalName + "</a></td>" + "<td><img height ='150' width = '200' src=" + pictureUrl + ">" + "</td>" + "<td>" + data[i].animalDescription + "</td>" + "<td>" + "<a href = '" + buttonUrl + "'><button class='btn btn-dark'>Find Habitat Nearby</button></a>";
                     $('tbody').append(tableBody);
                 }
             }

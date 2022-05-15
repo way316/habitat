@@ -25,6 +25,8 @@ public class AnimalDetail {
 
     private String commercialSpecies;
 
+    private String enDanger;
+
     public Integer getId() {
         return id;
     }
@@ -119,5 +121,13 @@ public class AnimalDetail {
 
     public void setCommercialSpecies(String commercialSpecies) {
         this.commercialSpecies = commercialSpecies == null ? null : commercialSpecies.trim();
+    }
+
+    public String getEnDanger() {
+        return enDanger;
+    }
+
+    public void setEnDanger(String enDanger) {
+        this.enDanger = enDanger == null ? null : enDanger.trim();
     }
 }

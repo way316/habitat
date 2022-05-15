@@ -14,6 +14,7 @@
     <result column="distribution" property="distribution" jdbcType="VARCHAR" />
     <result column="habitat_types" property="habitatTypes" jdbcType="VARCHAR" />
     <result column="commercial_species" property="commercialSpecies" jdbcType="VARCHAR" />
+    <result column="En_danger" property="enDanger" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -75,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, vernacular_name, brief_description, description, biology, habitat_info, native_status, 
-    diet, colours, distribution, habitat_types, commercial_species
+    diet, colours, distribution, habitat_types, commercial_species, En_danger
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="ie.ta21.habitat.entity.AnimalDetailExample" >
     select
@@ -111,13 +112,13 @@
     insert into animal_detail (id, vernacular_name, brief_description, 
       description, biology, habitat_info, 
       native_status, diet, colours, 
-      distribution, habitat_types, commercial_species
-      )
+      distribution, habitat_types, commercial_species, 
+      En_danger)
     values (#{id,jdbcType=INTEGER}, #{vernacularName,jdbcType=VARCHAR}, #{briefDescription,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{biology,jdbcType=VARCHAR}, #{habitatInfo,jdbcType=VARCHAR}, 
       #{nativeStatus,jdbcType=VARCHAR}, #{diet,jdbcType=VARCHAR}, #{colours,jdbcType=VARCHAR}, 
-      #{distribution,jdbcType=VARCHAR}, #{habitatTypes,jdbcType=VARCHAR}, #{commercialSpecies,jdbcType=VARCHAR}
-      )
+      #{distribution,jdbcType=VARCHAR}, #{habitatTypes,jdbcType=VARCHAR}, #{commercialSpecies,jdbcType=VARCHAR}, 
+      #{enDanger,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="ie.ta21.habitat.entity.AnimalDetail" >
     insert into animal_detail
@@ -158,6 +159,9 @@
       <if test="commercialSpecies != null" >
         commercial_species,
       </if>
+      <if test="enDanger != null" >
+        En_danger,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -195,6 +199,9 @@
       </if>
       <if test="commercialSpecies != null" >
         #{commercialSpecies,jdbcType=VARCHAR},
+      </if>
+      <if test="enDanger != null" >
+        #{enDanger,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -243,6 +250,9 @@
       <if test="record.commercialSpecies != null" >
         commercial_species = #{record.commercialSpecies,jdbcType=VARCHAR},
       </if>
+      <if test="record.enDanger != null" >
+        En_danger = #{record.enDanger,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -261,7 +271,8 @@
       colours = #{record.colours,jdbcType=VARCHAR},
       distribution = #{record.distribution,jdbcType=VARCHAR},
       habitat_types = #{record.habitatTypes,jdbcType=VARCHAR},
-      commercial_species = #{record.commercialSpecies,jdbcType=VARCHAR}
+      commercial_species = #{record.commercialSpecies,jdbcType=VARCHAR},
+      En_danger = #{record.enDanger,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -302,6 +313,9 @@
       <if test="commercialSpecies != null" >
         commercial_species = #{commercialSpecies,jdbcType=VARCHAR},
       </if>
+      <if test="enDanger != null" >
+        En_danger = #{enDanger,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -317,7 +331,8 @@
       colours = #{colours,jdbcType=VARCHAR},
       distribution = #{distribution,jdbcType=VARCHAR},
       habitat_types = #{habitatTypes,jdbcType=VARCHAR},
-      commercial_species = #{commercialSpecies,jdbcType=VARCHAR}
+      commercial_species = #{commercialSpecies,jdbcType=VARCHAR},
+      En_danger = #{enDanger,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
