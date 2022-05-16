@@ -21,18 +21,26 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" type="text/css" href="../css/homePage.css"/>
     <link rel="stylesheet" type="text/css" href="../css/education.css"/>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="../css/scroll.css" rel="stylesheet">
 </head>
 <body>
-<script>
-    // const scroll = document.getElementById('scroll').getElementsByTagName('img')
-    // scroll.addEventListener('click',function (){
-    //     var h=$(window).scrollTop();
-    //     $("html,body").animate({ scrollTop: h + 400 }, 400);
-    // });
-    // $('#ppp').click(function (){
-    //     window.scrollTo({ top: 1000, behavior: 'smooth' });
-    // });
+
+<script type="text/javascript">
+    function openWin(url)
+    {
+        var name;
+        var iWidth=380;
+        var iHeight=250;
+        var iTop = (window.screen.height-30-iHeight)/2;
+        var iLeft = (window.screen.width-10-iWidth)/2;
+        window.open(url,name,'height='+iHeight+',innerHeight='+iHeight+',width='+iWidth+',innerWidth='+iWidth+',top='+iTop+',left='+iLeft+',toolbar=no,menubar=no,scrollbars=auto,resizable=no,location=no,status=no');
+    }
+    $(function() {
+        $('.quiz').click(function() {
+            openWin('/quiz');
+        });
+    });
 </script>
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -106,7 +114,7 @@
                         animal world and its protection
                     </div>
                     <div class="column_btn text-center">
-                        <a href="/quiz">MORE</a>
+                        <a class="quiz">MORE</a>
                     </div>
                 </div>
             </div>
