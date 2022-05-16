@@ -13,7 +13,7 @@ public class AnimalHabitatDAO {
     @Autowired
     CleanDataMapper cleanDataMapper;
 
-    public List<String> getNameList() {
+    public List<AnimalDetail> getNameList() {
         return cleanDataMapper.selectNames();
     }
 

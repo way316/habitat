@@ -20,6 +20,11 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("/quiz")
+    public String quiz(Model model) {
+        return "quiz";
+    }
+
     @RequestMapping("/about")
     public String foundHabitat(Model model) {
         return "Rescue";
@@ -32,26 +37,26 @@ public class IndexController {
 
 
     @RequestMapping("/findAnimalInfo/{animalName}")
-    public String findInfoByName (@PathVariable("animalName") String animalName, Model model) {
+    public String findInfoByName(@PathVariable("animalName") String animalName, Model model) {
         AnimalDetail animalInfo = animalHabitatService.getAnimalInfo(animalName);
-        model.addAttribute("animalInfo",animalInfo);
+        model.addAttribute("animalInfo", animalInfo);
         return "animalDetail";
     }
 
     @RequestMapping("/findAnimalDistribution")
     public String findAnimalDistribution(Model model) {
-        List<String> commonAnimals = animalHabitatService.getAnimalNames();
-        model.addAttribute("commonAnimals", commonAnimals);
+        List<AnimalDetail> animalDetailListList = animalHabitatService.getAnimalNames();
+        model.addAttribute("commonAnimals", animalDetailListList);
         return "animalHabitat";
     }
 
     @RequestMapping("/findNearbyHabitat/{latitude}/{longitude}/{animalName}")
     public String findNearbyHabitat(Model model, @PathVariable("latitude") String latitude, @PathVariable("longitude") String longitude, @PathVariable("animalName") String animalName) {
-        List<Coordinates> positionList = animalHabitatService.findNearbyHabitat(latitude,longitude,animalName);
+        List<Coordinates> positionList = animalHabitatService.findNearbyHabitat(latitude, longitude, animalName);
         model.addAttribute("animalName", animalName);
-        model.addAttribute("positionList",positionList);
-        model.addAttribute("longitude",longitude);
-        model.addAttribute("latitude",latitude);
+        model.addAttribute("positionList", positionList);
+        model.addAttribute("longitude", longitude);
+        model.addAttribute("latitude", latitude);
         return "mapPage";
     }
 

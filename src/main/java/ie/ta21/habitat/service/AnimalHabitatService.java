@@ -5,7 +5,7 @@ import ie.ta21.habitat.entity.*;
 import java.util.List;
 
 public interface AnimalHabitatService {
-    List<String> getAnimalNames();
+    List<AnimalDetail> getAnimalNames();
 
     List<Coordinates> findCoordinatesByName(String name);
 

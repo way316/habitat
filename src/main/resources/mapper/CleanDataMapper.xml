@@ -58,8 +58,8 @@
       </foreach>
     </where>
   </sql>
-  <select id="selectNames" resultType="String">
-    SELECT vernacularName FROM Clean_data GROUP BY vernacularName;
+  <select id="selectNames" resultType="ie.ta21.habitat.entity.AnimalDetail">
+    SELECT * FROM Clean_data GROUP BY vernacularName;
   </select>
   <select id="getCoordinatesByName" resultType="ie.ta21.habitat.entity.Coordinates">
     SELECT decimalLatitude, decimalLongitude FROM Clean_data WHERE vernacularName LIKE "%"#{name}"%" LIMIT 100;

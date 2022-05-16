@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
-    <base th:href="@{/}">
+    <title>Discovery - Animal Helping Hands</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../image/icon.png"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
     <script src="../js/animalHabitat.js"></script>
     <link href="../css/homePage.css" rel="stylesheet"/>
@@ -45,8 +47,8 @@
                     would be shown for you — to learn how to treat them </p>
                 <select id="inputBox" class="form-select" data-placeholder="Select an animal">
                     <option></option>
-                    <tr th:each="animalName: ${commonAnimals}">
-                        <option th:text="${animalName}"/>
+                    <tr th:each="animalDetail: ${commonAnimals}">
+                        <option th:text="${animalDetail.vernacularName}"/>
                     </tr>
                 </select>
                 <div>&nbsp</div>
@@ -61,7 +63,8 @@
 
 
 <footer class="py-5 bg-dark">
-    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white"><img src="../image/logo1.jpg" width="45px" height="45px">Kangaroo Developer</p>
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white"><img src="../image/logo1.jpg" width="45px"
+                                                                                   height="45px">Kangaroo Developer</p>
     </div>
 </footer>
 </body>
@@ -73,11 +76,11 @@
         $("#detailButton").click(function () {
             var animalName = $("#inputBox option:selected").text();
             console.log(animalName);
-            if (animalName=="") {
+            if (animalName == "") {
 
             } else {
                 herf = "/findAnimalInfo/" + animalName;
-                window.location.href="/findAnimalInfo/" + animalName;
+                window.location.href = "/findAnimalInfo/" + animalName;
             }
         });
     });

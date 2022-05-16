@@ -19,7 +19,7 @@ public class AnimalHabitatServiceImpl implements AnimalHabitatService {
     AnimalInfoDAO animalInfoDAO;
 
     @Override
-    public List<String> getAnimalNames() {
+    public List<AnimalDetail> getAnimalNames() {
         return animalHabitatDAO.getNameList();
     }
 
