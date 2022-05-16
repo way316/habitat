@@ -29,6 +29,21 @@ public class AnimalHabitatServiceImpl implements AnimalHabitatService {
     }
 
     @Override
+    public List<String> getEndangerAnimalNames() {
+        return animalInfoDAO.getEndangerAnimalNames();
+    }
+
+    @Override
+    public List<Integer> countAnimalsInYears(String animalName) {
+        ArrayList<Integer> countList = new ArrayList<>();
+        for (int year = 2013; year < 2022; year++) {
+            int count = animalHabitatDAO.countAnimalsByYear(animalName, year);
+            countList.add(count);
+        }
+        return countList;
+    }
+
+    @Override
     public List<Coordinates> findCoordinatesByName(String name) {
         return animalHabitatDAO.getCoordinatesByName(name);
     }
@@ -38,8 +53,10 @@ public class AnimalHabitatServiceImpl implements AnimalHabitatService {
         List<String> animalNameList = animalHabitatDAO.getAnimalByCoordinates(latitude, longitude);
         ArrayList<FindAnimalListByCoordinatesVO> animalListByCoordinatesVOS = new ArrayList<>();
         for (String animalName : animalNameList) {
-            String animalDescription = animalInfoDAO.getAnimalInformation(animalName).getBriefDescription();
-            FindAnimalListByCoordinatesVO findAnimalListByCoordinatesVO = new FindAnimalListByCoordinatesVO(animalName, animalDescription);
+            AnimalDetail animalDetail = animalInfoDAO.getAnimalInformation(animalName);
+            String animalDescription = animalDetail.getBriefDescription();
+            String animalEndanger = animalDetail.getEnDanger();
+            FindAnimalListByCoordinatesVO findAnimalListByCoordinatesVO = new FindAnimalListByCoordinatesVO(animalName, animalDescription, animalEndanger);
             animalListByCoordinatesVOS.add(findAnimalListByCoordinatesVO);
         }
         return animalListByCoordinatesVOS;

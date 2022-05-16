@@ -28,4 +28,12 @@ public class AnimalHabitatDAO {
     public List<Coordinates> findNearbyHabitat(String latitude, String longitude, String animalName) {
         return cleanDataMapper.getNearbyHabitat(latitude, longitude, animalName);
     }
+
+    public int countAnimalsByYear(String animalName, int year) {
+        CleanDataExample cleanDataExample = new CleanDataExample();
+        CleanDataExample.Criteria criteria = cleanDataExample.createCriteria();
+        criteria.andYearEqualTo(String.valueOf(year));
+        criteria.andVernacularnameEqualTo(animalName);
+        return cleanDataMapper.countByExample(cleanDataExample);
+    }
 }

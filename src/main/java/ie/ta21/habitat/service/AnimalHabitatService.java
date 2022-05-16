@@ -15,4 +15,8 @@ public interface AnimalHabitatService {
 
 
     AnimalDetail getAnimalInfo(String name);
+
+    List<String> getEndangerAnimalNames();
+
+    List<Integer> countAnimalsInYears(String animalName);
 }

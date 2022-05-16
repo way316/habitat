@@ -104,7 +104,12 @@ function initMap() {
                     animalName = animalName.replaceAll(" ", "%20");
                     console.log(animalName);
                     var pictureUrl = "../image/animals/" + animalName + ".jpg";
-                    var tableBody = "<tr><td>" + number + "</td>" + "<td>" + "<a href ='" + nameUrl + "' class = 'text-dark'>" + data[i].animalName + "</a></td>" + "<td><img height ='150' width = '200' src=" + pictureUrl + ">" + "</td>" + "<td>" + data[i].animalDescription + "</td>" + "<td>" + "<a href = '" + buttonUrl + "'><button class='btn btn-dark'>Find Habitat Nearby</button></a>";
+                    var animalEndanger = data[i].enDanger;
+                    if (animalEndanger == "yes") {
+                        var tableBody = "<tr><td style='color:#ff0000'>" + number + "</td>" + "<td>" + "<a style='color:#ff0000' href ='" + nameUrl + "' class = 'text-dark'>" + data[i].animalName + "</a></td>" + "<td><img height ='150' width = '200' src=" + pictureUrl + ">" + "</td>" + "<td>" + data[i].animalDescription + "</td>" + "<td>" + "<a href = '" + buttonUrl + "'><button class='btn btn-danger'>Find Habitat Nearby</button></a>";
+                    } else {
+                        var tableBody = "<tr><td>" + number + "</td>" + "<td>" + "<a href ='" + nameUrl + "' class = 'text-dark'>" + data[i].animalName + "</a></td>" + "<td><img height ='150' width = '200' src=" + pictureUrl + ">" + "</td>" + "<td>" + data[i].animalDescription + "</td>" + "<td>" + "<a href = '" + buttonUrl + "'><button class='btn btn-dark'>Find Habitat Nearby</button></a>";
+                    }
                     $('tbody').append(tableBody);
                 }
             }

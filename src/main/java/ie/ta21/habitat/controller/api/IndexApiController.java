@@ -45,4 +45,10 @@ public class IndexApiController {
         List<Coordinates> animalList = animalHabitatService.findNearbyHabitat(latitude,longitude,animalName);
         return animalList;
     }
+
+    @RequestMapping("/countAnimals/{animalName}")
+    public List<Integer> countAnimals (@PathVariable("animalName") String animalName) {
+        List<Integer> animalCounts = animalHabitatService.countAnimalsInYears(animalName);
+        return animalCounts;
+    }
 }

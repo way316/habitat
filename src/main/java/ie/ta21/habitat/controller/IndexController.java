@@ -1,5 +1,6 @@
 package ie.ta21.habitat.controller;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import ie.ta21.habitat.entity.*;
 import ie.ta21.habitat.service.AnimalHabitatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,4 +61,10 @@ public class IndexController {
         return "mapPage";
     }
 
+    @RequestMapping("/endanger")
+    public String endangerAnimals(Model model) {
+        List<String> endangerAnimals = animalHabitatService.getEndangerAnimalNames();
+        model.addAttribute("endangerAnimals", endangerAnimals);
+        return "endangerAnimals";
+    }
 }

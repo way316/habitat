@@ -27,7 +27,8 @@
                 <li class="nav-item"><a class="nav-link" href="/about">Rescue</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="/findAnimalDistribution">
                     Discovery</a></li>
-                <li class="nav-item"><a class="nav-link " aria-current="page" href="/findAnimal">Find Nearby Habitat</a></li>
+                <li class="nav-item"><a class="nav-link " aria-current="page" href="/findAnimal">Find Nearby Habitat</a>
+                </li>
 
             </ul>
         </div>
@@ -41,11 +42,10 @@
             <div class="col-xl-6">
                 <div class="text-center text-white">
                     <!-- Page heading-->
-                    <h1 class="mb-5">Animal's Habitat nearby</h1>
+                    <h1 class="mb-5" th:text="${animalName} + ' Habitat Nearby'">Animal's Habitat nearby</h1>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </header>
 
@@ -56,9 +56,20 @@
             async
     ></script>
 </div>
+<div class="container px-4 px-lg-5">
+    <div>&nbsp</div>
+    <a href="/findAnimal">
+        <button class="btn-lg btn-dark" id="submitButton" type="submit">
+            Back to Find Habitat
+        </button>
+    </a>
+    <div>&nbsp</div>
+</div>
+
 <footer class="py-5 bg-dark">
-  <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white"><img src="../image/logo1.jpg" width="45px" height="45px">Kangaroo Developer</p>
-  </div>
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white"><img src="../image/logo1.jpg" width="45px"
+                                                                                   height="45px">Kangaroo Developer</p>
+    </div>
 </footer>
 </body>
 <script th:inline="javascript">
@@ -102,7 +113,7 @@
                 optimized: false,
             });
             geocoder
-                .geocode({ location: position })
+                .geocode({location: position})
                 .then((response) => {
                     if (response.results[0]) {
                         console.log(response.results[0]);
@@ -111,7 +122,8 @@
                             infoWindow.close();
                             infoWindow.open(marker.getMap(), marker);
                         });
-                    }});
+                    }
+                });
         });
     };
 </script>

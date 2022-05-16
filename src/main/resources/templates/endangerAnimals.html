@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <title>Discovery - Animal Helping Hands</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../image/icon.png"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <script src="../js/animalHabitat.js"></script>
+    <link href="../css/homePage.css" rel="stylesheet"/>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <link href="../css/select2.min.css" rel="stylesheet"/>
+    <script src="../js/select2.full.min.js"></script>
+    <link href="../css/select2-bootstrap-5-theme.min.css" rel="stylesheet"/>
+    <script src="https://cdn.staticfile.org/echarts/5.3.1/echarts.min.js"></script>
+</head>
+<body>
+
+
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <a class="navbar-brand" href="#!">Land Animal Helping Hands</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/index">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">Rescue</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/findAnimalDistribution">
+                    Discovery</a></li>
+                <li class="nav-item"><a class="nav-link " aria-current="page" href="/findAnimal">Find Nearby Habitat</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center text-white">
+                <h3 class="mb-5 text-white">Endangered Animals</h3>
+                <p> Select one endangered animal from list and click 'view detail',<br>
+                    the animal found records' count will be shown. </p>
+                <select id="inputBox" class="form-select" data-placeholder="Select an animal">
+                    <option></option>
+                    <tr th:each="animalName: ${endangerAnimals}">
+                        <option th:text="${animalName}"/>
+                    </tr>
+                </select>
+                <div>&nbsp</div>
+                <div>
+                    <button id="detailButton" class="btn btn-primary btn-lg">View Detail</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</header>
+<div class="container">
+    <div id="cd" class="px-lg-5" style="height: 600px"></div>
+</div>
+<div class="container">
+    <div id="pie" class="px-lg-5" style="height: 600px"></div>
+</div>
+<footer class="py-5 bg-dark">
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white"><img src="../image/logo1.jpg" width="45px"
+                                                                                   height="45px">Kangaroo Developer</p>
+    </div>
+</footer>
+<script type="text/javascript">
+    var chartDom = document.getElementById('pie');
+    var myChartPie = echarts.init(chartDom);
+    var option2 = {
+        title: {
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left'
+        },
+        series: [
+            {
+                name: 'Access From',
+                type: 'pie',
+                radius: '50%',
+                data: [
+                    { value: 203, name: 'Invasive species' },
+                    { value: 80, name: 'Habitat loss' },
+                    { value: 61, name: 'Adverse fire regimes' },
+                    { value: 32, name: 'Climate' },
+                    { value: 29, name: 'Human activities' },
+                    { value: 17, name: 'Others' },
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    myChartPie.setOption(option2);
+
+    var dom = document.getElementById('cd');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+    var app = {};
+
+    var option;
+
+    option = {
+        title: {
+            text: 'Animal count'
+        },
+        xAxis: {
+            type: 'category',
+            data: ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                type: 'line'
+            }
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+</script>
+
+</body>
+<script>
+    $(document).ready(function () {
+        $('.form-select').select2({
+            theme: "bootstrap-5",
+        });
+        $("#detailButton").click(function () {
+            var url = "/api/countAnimals/";
+            var animalName = $("#inputBox option:selected").text();
+            console.log(animalName);
+            url = url + animalName;
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: url,
+                    success: function (data) {
+                        option = {
+                            title: {
+                                text: animalName + ' Count by Year'
+                            },
+                            xAxis: {
+                                name: 'Years',
+                                type: 'category',
+                                data: ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            yAxis: {
+                                type: 'value',
+                                name: 'Count'
+                            },
+                            series: [
+                                {
+                                    data: data,
+                                    type: 'line'
+                                }
+                            ]
+                        };
+                        if (option && typeof option === 'object') {
+                            myChart.setOption(option);
+                        }
+                    }
+                })
+            }
+        );
+    });
+</script>
+</html>
