@@ -1,0 +1,53 @@
+#{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+html{
+	scroll-behavior: smooth;
+}
+section{
+	display: flex;
+}
+.scroll-down{
+	height:60px;
+	width: 40px;
+	position: absolute;
+	left: 50%;
+	/*bottom:100px;*/
+	border-radius: 50px;
+	cursor: pointer;
+}
+.scroll-down::before,
+.scroll-down::after{
+	content: '';
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	border: 2px solid lightskyblue;
+	height: 30px;
+	width: 30px;
+	transform: translate(-50%, -100%) rotate(45deg);
+	border-top: transparent;
+	border-left: transparent;
+	animation: scroll-down 2s ease-in-out infinite;
+}
+.scroll-down::after{
+	top: 30%;
+	animation-delay: .4s;
+}
+@keyframes scroll-down{
+	0%{
+		opacity: 0;
+	}
+	30%{
+		opacity: 1;
+	}
+	60%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+		top: 90%;
+	}
+}
