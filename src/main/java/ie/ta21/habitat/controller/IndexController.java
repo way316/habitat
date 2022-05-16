@@ -28,7 +28,7 @@ public class IndexController {
 
     @RequestMapping("/about")
     public String foundHabitat(Model model) {
-        return "Rescue";
+        return "Education";
     }
 
     @RequestMapping("/findAnimal")
@@ -59,6 +59,11 @@ public class IndexController {
         model.addAttribute("longitude", longitude);
         model.addAttribute("latitude", latitude);
         return "mapPage";
+    }
+
+    @RequestMapping("/education")
+    public String education(Model model) {
+        return "education";
     }
 
     @RequestMapping("/endanger")

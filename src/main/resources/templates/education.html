@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <base th:href="@{/}">
+    <title>Education</title>
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../image/favicon.ico"/>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"
+          type="text/css"/>
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" type="text/css" href="../css/homePage.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/education.css"/>
+    <link href="../css/scroll.css" rel="stylesheet">
+</head>
+<body>
+<script>
+    // const scroll = document.getElementById('scroll').getElementsByTagName('img')
+    // scroll.addEventListener('click',function (){
+    //     var h=$(window).scrollTop();
+    //     $("html,body").animate({ scrollTop: h + 400 }, 400);
+    // });
+    // $('#ppp').click(function (){
+    //     window.scrollTo({ top: 1000, behavior: 'smooth' });
+    // });
+</script>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <a class="navbar-brand" href="#!"> Land Animal Helping Hands</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/index">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/about">Education</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/findAnimalDistribution">
+                    Discovery</a></li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/findAnimal">Find Nearby Habitat</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <div class="text-center text-white">
+
+                    <h3 class="mb-5">Education</h3>
+                    <p class="lead mb-0"><strong>We will introduce the species of endangered animals and the changes<br>
+                        in their numbers to arouse people's awareness of animal protection.<br>
+                        It also provides animal rescue guides for animal protectors<br>
+                        <br><br></strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="index_section sec01">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="column_figure">
+                    <img src="../image/endangered animal.jpg"/>
+                </div>
+                <div class="column_content">
+                    <div class="column_title text-center">
+                        Endangered Animals
+                    </div>
+                    <div class="column_con">
+                        A large number of animals are declining due to the influence of various external environments
+                        and human activities.<br>
+                        Click the button below to see animal found records of the endangered animal.
+                    </div>
+                    <div class="column_btn text-center">
+                        <a href="/endanger">MORE</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="column_figure">
+                    <img src="../image/quiz.jpg"/>
+                </div>
+                <div class="column_content">
+                    <div class="column_title text-center">
+                        Quiz
+                    </div>
+                    <div class="column_con">
+                        Test your knowledge about Victoria's land animals and better understand animals' habits and
+                        habitats.
+                        Five single-choice questions to quickly and efficiently know your own understanding of the
+                        animal world and its protection
+                    </div>
+                    <div class="column_btn text-center">
+                        <a href="/quiz">MORE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="index_section sec03">
+    <div class="container">
+        <div class="row index_section_hd text-center">
+            Rescue Steps
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <section class="showcase">
+                    <div class="container-fluid p-0">
+                        <div class="row g-0" id="downTo">
+                            <div class="col-lg-6 order-lg-2 text-white showcase-img"
+                                 style="background-image: url('../image/search.jpg')"></div>
+                            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                                <a href="/findAnimal"><h2>Search the Location</h2></a>
+                                <p class="lead mb-0">Input the location first to see what animals are nearby.</p><br>
+                                <div class="col-auto">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-0">
+                            <div class="col-lg-6 text-white showcase-img"
+                                 style="background-image: url('../image/rescue.jpg')"></div>
+                            <div class="col-lg-6 my-auto showcase-text">
+                                <h2>Choose the animal nearby the Location</h2>
+                                <p class="lead mb-0">A list of animals nearby the inputed location will show in a list,
+                                    choice one of the animal you want to transfer.</p><br>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-lg-6 order-lg-2 text-white showcase-img"
+                                     style="background-image: url('../image/bird.jpg')"></div>
+                                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                                    <h2>Transfer to new home</h2>
+                                    <p class="lead mb-0">You can now transfer the injured animals to a licensed wildlife
+                                        shelter or nearby habitat with a suitable vehicle.</p>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="py-5 bg-dark">
+    <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">
+        <img src="../image/logo1.jpg" width="45px" height="45px">Kangaroo Developer
+    </p>
+
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>

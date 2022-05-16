@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="/index">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/about">Rescue</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">Education</a></li>
                 <li class="nav-item"><a class="nav-link" aria-current="page" href="/findAnimalDistribution">
                     Discovery</a></li>
                 <li class="nav-item"><a class="nav-link " aria-current="page" href="/findAnimal">Find Nearby Habitat</a>
@@ -44,7 +44,7 @@
             <div class="col-md-6 text-center text-white">
                 <h3 class="mb-5 text-white">Endangered Animals</h3>
                 <p> Select one endangered animal from list and click 'view detail',<br>
-                    the animal found records' count will be shown. </p>
+                    the animal found records  will be shown below. </p>
                 <select id="inputBox" class="form-select" data-placeholder="Select an animal">
                     <option></option>
                     <tr th:each="animalName: ${endangerAnimals}">
@@ -62,9 +62,12 @@
 </header>
 <div class="container">
     <div id="cd" class="px-lg-5" style="height: 600px"></div>
-</div>
-<div class="container">
-    <div id="pie" class="px-lg-5" style="height: 600px"></div>
+    <div>&nbsp</div>
+    <a href="/about">
+        <button class="btn-lg btn-dark" id="submitButton" type="submit">
+            Back to Education
+        </button>
+    </a>
 </div>
 <footer class="py-5 bg-dark">
     <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white"><img src="../image/logo1.jpg" width="45px"
@@ -72,44 +75,6 @@
     </div>
 </footer>
 <script type="text/javascript">
-    var chartDom = document.getElementById('pie');
-    var myChartPie = echarts.init(chartDom);
-    var option2 = {
-        title: {
-            left: 'center'
-        },
-        tooltip: {
-            trigger: 'item'
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left'
-        },
-        series: [
-            {
-                name: 'Access From',
-                type: 'pie',
-                radius: '50%',
-                data: [
-                    { value: 203, name: 'Invasive species' },
-                    { value: 80, name: 'Habitat loss' },
-                    { value: 61, name: 'Adverse fire regimes' },
-                    { value: 32, name: 'Climate' },
-                    { value: 29, name: 'Human activities' },
-                    { value: 17, name: 'Others' },
-                ],
-                emphasis: {
-                    itemStyle: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
-                }
-            }
-        ]
-    };
-    myChartPie.setOption(option2);
-
     var dom = document.getElementById('cd');
     var myChart = echarts.init(dom, null, {
         renderer: 'canvas',
