@@ -20,14 +20,18 @@
           type="text/css"/>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" type="text/css" href="../css/homePage.css"/>
+    <link href="../css/scroll.css" rel="stylesheet">
 </head>
 <body>
 <script>
-    const scroll = document.getElementById('scroll').getElementsByTagName('img')
-    scroll.addEventListener('click',function (){
-        var h=$(window).scrollTop();
-        $("html,body").animate({ scrollTop: h+800 }, 800);
-    });
+    // const scroll = document.getElementById('scroll').getElementsByTagName('img')
+    // scroll.addEventListener('click',function (){
+    //     var h=$(window).scrollTop();
+    //     $("html,body").animate({ scrollTop: h + 400 }, 400);
+    // });
+    // $('#ppp').click(function (){
+    //     window.scrollTo({ top: 1000, behavior: 'smooth' });
+    // });
 </script>
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -60,7 +64,8 @@
                         nature disasters had killed millions of animals and destroyed<br>
                         a large area of habitats.Our platform is aiming to help volunteers<br>
                         and organizations torelocate animals in danger of habitat loss.<br>
-                        <br><br></strong><h4><br><div id="scroll"><img src="../image/ScrollDown.jpg" width="55px" height="55px"></div></h4>
+                        <br><br></strong><h4><br><br>
+                    <a href="#downTo"><div class="scroll-down"></div></a></h4>
                 </div>
             </div>
         </div>
@@ -70,7 +75,7 @@
 <!-- Image Showcases-->
 <section class="showcase">
     <div class="container-fluid p-0">
-        <div class="row g-0">
+        <div class="row g-0" id="downTo">
             <div class="col-lg-6 order-lg-2 text-white showcase-img"
                  style="background-image: url('../image/kaola.jpg')"></div>
             <div class="col-lg-6 order-lg-1 my-auto showcase-text">
@@ -87,7 +92,7 @@
 
             </div>
         </div>
-        <div class="row g-0">
+        <div class="row g-0" >
             <div class="col-lg-6 text-white showcase-img" style="background-image: url('../image/kangaroo.jpg')"></div>
             <div class="col-lg-6 my-auto showcase-text">
                 <h2>Animal care</h2>
